@@ -1,0 +1,39 @@
+<div class="tax-attribute-contain">
+<div class="content pt-15">
+  <div class="white-bg md-whiteframe-4dp" ng-show="vm.isLoading">
+    <div class="run-head">
+      <ul class="run-header">
+        <li>Attr Id</li>
+        <li>Attr Name</li>
+        <li>Display Name</li>
+        <li>Is Visible</li>
+        <li>Is Groupable</li>
+        <li>Type</li>
+        <li>Actions</li>
+      </ul>
+      <div *ngFor="let attribute of attributes; let i= index;" [ngClass]="{'odd-row':i%2===0,'even-row':i%2!==0}" class="each-list">
+        <ul class="run-list" >
+
+          <li >{{attribute.attr_id}}</li>
+          <li>{{attribute.field_name}}</li>
+          <li>{{attribute.display_name}}</li>
+          <li>{{attribute.displayable}}</li>
+          <li>{{attribute.groupable}}</li>
+          <li>{{attribute.entity_name}}</li>
+          <li>
+            <div class="edit-but">
+              <button class="md-icon-button"  (click)="update(attribute)"><mat-icon _ngcontent-c49="" class="s-16 mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon></button>
+
+
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="spinner-load" *ngIf="!attributesLoaded">
+          <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

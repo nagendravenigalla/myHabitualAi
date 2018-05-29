@@ -1,0 +1,37 @@
+.dialog-save{
+  margin: 0px auto;
+  width:100%;
+  display: table;
+  position: relative;
+  height: auto;
+  background: #ffffff;
+  padding: 20px;
+
+  .cross-sign{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+  h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+  }
+
+
+    .mat-dialog-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      .mat-button {
+        border: 1px solid;
+        color: #fc6d69;
+      }
+    }
+  .mat-dialog-actions:last-child {
+    margin-bottom: 0;
+  }
+}

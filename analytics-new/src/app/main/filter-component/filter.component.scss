@@ -1,0 +1,102 @@
+.filter-ele {
+  font-size: 12px;
+  margin-top: 10px;
+    .filter-content {
+      display: flex;
+      width: 100%;
+      &.disableFields{
+        color: #c7c0c0;
+        -webkit-text-fill-color: #c7c0c0;
+        .cross-del{
+          -webkit-text-fill-color: #c7c0c0;
+        }
+      }
+      .filter-cont-eve {
+        padding-bottom: 4px;
+        width: 48%;
+      }
+      .mat-form-field-underline {
+        height: 0;
+      }
+
+      .mat-select-arrow-wrapper {
+        display: none;
+      }
+
+      .mat-selected-value {
+        max-width: inherit;
+      }
+      &.filter-cont {
+        display: flex;
+        align-items: center;
+      }
+      &.last-el {
+        margin-right: 10px;
+      }
+      .where-by {
+        width: 100%;
+        .where-list {
+          display: flex;
+          div {
+            display: inline;
+          }
+          .btn-group{
+            width:100px;
+          }
+
+          mat-form-field {
+            width: 100px;
+            height: 28px;
+            margin-right: 6px;
+            margin-left: 5px;
+          }
+          mat-form-field.operator-cl {
+            width: 40px;
+          }
+
+          .where-in{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 51%;
+            &.action-in{
+              width: 77%;
+            }
+          }
+
+          .cross-del{
+            display: flex;
+            justify-content: flex-end;
+            width: 43%;
+            &.action-in{
+              width:20%;
+            }
+            .fa {
+              display: inline;
+            }
+          }
+
+        }
+      }
+
+    }
+
+    .filter-cond {
+      display: flex;
+      justify-content: flex-end;
+      width: 51%;
+      position: relative;
+      .filter-cont {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-right: 10px;
+        .cross-del{
+
+        }
+        .fa {
+          display: inline;
+        }
+      }
+    }
+}

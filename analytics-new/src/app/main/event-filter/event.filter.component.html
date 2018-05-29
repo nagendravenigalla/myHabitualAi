@@ -1,0 +1,46 @@
+<div class="event-filter">
+  <div class="segments-main top-head-seg">
+    <div class="chart-name">
+      Create Segment
+    </div>
+    <div class="chart-actions" (click)="openDialog()">
+      <i class="fa fa-floppy-o" aria-hidden="true"></i>
+    </div>
+    <!--<div class="chart-actions">
+      <i class="fa fa-files-o" aria-hidden="true"><div>Copy</div></i>
+    </div>-->
+    <div style="clear:both">
+
+    </div>
+  </div>
+  <div class="segments-main">
+    <div class="segment-tile first-seg">
+      <div class="grid-contain">
+        <div class="grid-head">Events</div>
+        <div *ngFor="let event of eventsData; let i = index" class="filter-con">
+          <fuse-event-filter [showSelect]="true" [eventData]="event"  (groupByClicked)="eventFilterClick('event',i, $event)" (whereClicked)="eventWhereClicked('event',i,$event)" (copyFilterClicked)="eventCopyFilterClicked('event',i,$event)" (eventSelection)="eventChanged('event',i,$event)" (groupSelection)="groupChanged('event',i,$event)" (whereSelection)="whereChanged('event',i,$event)" (whereOperatorSelection)="whereOperatorChanged('event',i,$event)" (whereValueSelection)="whereValueChanged('event',i,$event)" (deleteClauseEvent)="deleteFunc('eventsData', i, $event)"></fuse-event-filter>
+        </div>
+
+      </div>
+    </div>
+    <div class="segment-tile ">
+      <div class="grid-contain">
+        <div class="grid-head">...Performed by </div>
+        <div *ngFor="let event of userData; let i = index" class="filter-con">
+          <fuse-event-filter [showSelect]="false" [eventData]="event" (whereClicked)="eventWhereClicked('user',i,$event)" (copyFilterClicked)="eventCopyFilterClicked('user', i, $event)" (actionPerformedClicked)="addEventActionPerformed('user',i)" (whereSelection)="whereChanged('user',i,$event)" (whereOperatorSelection)="whereOperatorChanged('user',i,$event)" (whereValueSelection)="whereValueChanged('user',i,$event)" (actionOperatorSelection)="actionOperatorChanged('user',i,$event)" (actionSelection)="actionChanged('user',i,$event)" (deleteClauseEvent)="deleteFunc('userData', i, $event)" (actionValueSelection)="actionValueChanged('user',i,$event)"></fuse-event-filter>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="segments-main metric">
+    <div class="metric-tile">
+      <mat-radio-group [(ngModel)]="userType" (change) = "changeInUserMetric($event)">
+        <mat-radio-button value="unique_users">Unique Users</mat-radio-button>
+        <mat-radio-button value="total_transactions">Transaction Count</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+</div>

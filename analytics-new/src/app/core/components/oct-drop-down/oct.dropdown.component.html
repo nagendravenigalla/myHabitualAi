@@ -1,0 +1,14 @@
+
+  <div class="dropdown" #myDropdown=dropdown dropdown>
+    <span class="fake-link dropdown-toggle" dropdownToggle>{{selectedValue||octPlaceholder}} ▼</span>
+    <div class="dropdown-menu">
+      <ul dropdownMenu [hidden]="status">
+        <!--{{dropValueMenuName}}-->
+        <li *ngFor="let value of dropValues">
+          {{value.viewValue}}
+        </li>
+        <!--<li>Check it out @ GitHub</li>
+        <li>Now on git</li>-->
+      </ul>
+    </div>
+  </div>

@@ -1,0 +1,121 @@
+<div class="event-dialog">
+  <div class="add-run-button">
+    <button mat-raised-button (click)="openDialog()"><i class="fa fa-plus"></i>Generate Recommendations</button>
+  </div>
+
+  <mat-card id="dashboard-main-wrap">
+    <mat-card-content>
+      <div class="breadcrumb-header header layout-align-space-between-stretch layout-row" layout="row"
+           layout-align="space-between">
+        <div layout="column" layout-align="space-between" class="layout-align-space-between-stretch layout-column">
+          <div class="breadcrumb layout-align-start-center layout-row" layout="row" layout-align="start center">
+
+          </div>
+        </div>
+      </div>
+      <div class="border-bottom" layout="row" layout-align="space-between center" layout-wrap>
+        <div class="" layout="row" layout-align="start center" layout-align-sm="end" flex-sm="100">
+          <div class="h3"></div>
+        </div>
+
+
+      </div>
+      <div class="content pt-15">
+        <div class="white-bg md-whiteframe-4dp">
+          <!--<div ng-repeat="user in vm.allRuns">
+            <div class="progress-dot md-checked"><div class="md-container md-ink-ripple" md-ink-ripple="" md-ink-ripple-checkbox=""><div class="md-off"></div><div class="md-on"></div><div class="md-ripple-container"></div></div></div>
+          </div>-->
+          <div class="run-head">
+            <ul class="run-header">
+              <li>Id.</li>
+              <li>Recommendation name</li>
+              <li>Segment</li>
+              <li>Scheduled On</li>
+              <li>Status</li>
+              <!--<li>Summary</li>-->
+              <li>Actions</li>
+            </ul>
+            <div *ngFor="let run of runArray; let i= index;" [ngClass]="{'odd-row':i%2===0,'even-row':i%2!==0}" class="each-list">
+              <ul class="run-list" >
+                <li >{{run.serial_no}}</li>
+                <li>{{run.schedule_name}}</li>
+                <li>{{run.basename}}</li>
+                <li>{{run.timestamp}}</li>
+                <li>
+                  <div class="status-field">
+                    <div>{{run.status}}</div>
+                  </div>
+                </li>
+                <li>
+                  <div>
+                    <button class="md-icon-button"  mat-icon-button (click)="copyRun(run)"><i class="fa fa-files-o"></i></button>
+                    <button class="md-icon-button"  mat-icon-button (click)="deleteRun(run)"><i class="fa fa-trash-o"></i></button>
+                    <!--<button class="md-icon-button"  mat-icon-button (click)="refreshRun(run)"><i class="fa fa-refresh"></i></button>-->
+                    <button class="md-icon-button"  mat-icon-button (click)="downloadRun(run)" *ngIf="!run.isDownloading"><i class="fa fa-download" aria-hidden="true" ></i></button>
+                    <button class="md-icon-button"  mat-icon-button (click)="viewChart(run)"><i class="fa fa-line-chart" aria-hidden="true"></i></button>
+                    <button *ngIf="run.isDownloading"><mat-spinner class="spin-color" [diameter]="15"></mat-spinner></button>
+
+                    <button class="md-icon-button col-button"  *ngIf="run.childData.length>0" [ngClass]="{'active':run.collapsed}" mat-icon-button (click)="run.collapsed = !run.collapsed">
+                      <i class="fa fa-angle-down plus"></i>
+                      <i class="fa fa-angle-up minus"></i>
+                    </button>
+                  </div>
+
+                </li>
+              </ul>
+              <div class="collapsible-wrapper" [ngClass]="{'collapsed':!run.collapsed}">
+                <div class="collapsible">
+                  <div *ngFor="let childRun of run.childData; let i = index;">
+                    <ul class="run-list">
+                      <li >{{childRun.serial_no}}</li>
+                      <li> {{childRun.schedule_name}}_{{i+1}}</li>
+                      <li >{{childRun.basename}}</li>
+                      <li >{{childRun.timestamp}}</li>
+                      <li>
+                        <div class="status-field">
+                          <div style="display:inline">{{childRun.status}}</div>
+                        </div>
+                      </li>
+                      <li>
+                        <div>
+                          <button class="md-icon-button"  mat-icon-button (click)="copyRun(childRun)"><i class="fa fa-files-o"></i></button>
+                          <button class="md-icon-button"  mat-icon-button (click)="deleteRun(childRun)"><i class="fa fa-trash-o"></i></button>
+                          <button class="md-icon-button"  mat-icon-button (click)="downloadRun(childRun)" *ngIf="!run.isDownloading"><i class="fa fa-download" aria-hidden="true"></i></button>
+                          <button class="md-icon-button"  mat-icon-button (click)="viewChart(childRun)"><i class="fa fa-line-chart" aria-hidden="true"></i></button>
+                          <button *ngIf="run.isDownloading" ><mat-spinner class="spin-color" [diameter]="20"></mat-spinner></button>
+                        </div>
+
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="spinner-load inner" *ngIf="!loaded">
+              <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+            </div>
+            <div class="bottom" data-ng-if="vm.totalCount>10">
+              <div class="left"></div>
+              <div class="right">
+                <div class="info">
+                  <div class="dataTables_info" id="DataTables_Table_0_info">
+                    Showing {{start}}&nbsp; - &nbsp;{{end}} of  {{totalCount}} entries
+                  </div>
+                </div>
+                <div class="pagination">
+                  <div class="dataTables_paginate paging_simple" id="DataTables_Table_0_paginate">
+                    <a class="paginate_button previous" (click)="goToPrevious()" [ngClass]= "{'disabled':page===1}"
+                       >Previous</a>
+                    <a class="paginate_button next"  (click)="goToNext()" [ngClass]= "{'disabled':(end===totalCount)}">Next</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

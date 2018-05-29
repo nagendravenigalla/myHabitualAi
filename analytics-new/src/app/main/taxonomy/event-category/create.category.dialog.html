@@ -1,0 +1,149 @@
+<div class="dialog-save attribute-dia-save">
+
+    <button class="cross-sign" [mat-dialog-close]="false">
+        <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+    <div class="int-container">
+        <div class="breadcrumb flat">
+            <a [ngClass]="{'active': pageNumber === 0}">Create</a>
+            <a [ngClass]="{'active': pageNumber === 1}">Group</a>
+            <a [ngClass]="{'active': pageNumber === 2}">Summary</a>
+        </div>
+        <div class="example-container" *ngIf="pageNumber===0">
+            <h2>Create Model Input Groups</h2>
+            <div class="cat-name-container">
+
+                <div>
+                    <div class="edit-cat-group">
+                        <input placeholder="Name" [(ngModel)]="editData.name">
+                        <mat-error *ngIf="error">Please enter the name for a category</mat-error>
+                    </div>
+
+
+                </div>
+                <div>
+                    <div class="edit-cat-group">
+                        <input placeholder="Description" [(ngModel)]="editData.description"
+                               (blur)="addNewSubCategory(editData)">
+                        <mat-error *ngIf="error">Please enter the description</mat-error>
+                    </div>
+                </div>
+                <div style="width: 30%;">
+                    <button>
+                        <mat-icon _ngcontent-c49="" class="s-24 mat-icon material-icons" role="img" aria-hidden="true"
+                                  (click)="addNewSubCategory(editData)">add
+                        </mat-icon>
+                    </button>
+                </div>
+
+            </div>
+            <div class="cat-name-container">
+                <div class="sub-cat-contain scroll-cont">
+                    <ul class="run-header">
+                        <li>Name</li>
+                        <li>Description</li>
+                        <li>Model Input</li>
+                        <li>Use for Recommendation</li>
+                        <li>Actions</li>
+                    </ul>
+
+                    <ul class="run-list" *ngFor="let subCategory of subCategories; let i = index;">
+                        <li>{{subCategory.name}}</li>
+                        <li>{{subCategory.description}}</li>
+                        <li>
+                            <mat-icon _ngcontent-c49="" class="s-24 mat-icon material-icons check" role="img"
+                                      aria-hidden="true">check
+                            </mat-icon>
+                        </li>
+                        <li>
+                            <section class="example-section">
+                                <mat-slide-toggle
+                                        class="example-margin"
+                                        [checked]="subCategory.use_for_recommendation"
+                                        [(ngModel)]="subCategory.use_for_recommendation"
+                                >
+                                </mat-slide-toggle>
+                            </section>
+                        </li>
+                        <li class="actions">
+                            <span>
+                                <button class="md-icon-button"  mat-icon-button (click)="editCategory(i, subCategory)">
+                                    <i class="fa fa-pencil" title="edit"></i></button>
+
+                                <!--<button class="md-icon-button"  mat-icon-button (click)="deleteFromList(i)">
+                                    <i class="fa fa-trash-o" title="delete"></i></button>-->
+                            </span>
+                        </li>
+                    </ul>
+                    <div class="spinner-load inner" *ngIf="loaderObj.subCatLoader">
+                        <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div *ngIf="pageNumber===1" class="example-container">
+            <div class="cat-name-container">
+                <div class="sub-cat-contain">
+                    <div class="event-list-check">
+                        <!--<section class="example-section">
+                            <div>Event Name</div>
+                            <div class="group-select-lab">Select Group</div>
+                        </section>-->
+                        <ul class="run-header">
+                            <li>Event Name</li>
+                            <li>Select Group</li>
+
+                        </ul>
+                        <ul class="run-list" *ngFor="let event of events">
+                            <li>{{event.event_name}}</li>
+                            <li>
+                                <mat-form-field [floatLabel]="'never'">
+                                    <mat-select placeholder="Select Sub Group" [(ngModel)]="event.groupName">
+                                        <mat-option *ngFor="let groupName of subCategories" [value]="groupName.recommendation_id">
+                                            {{ groupName.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </li>
+
+                        </ul>
+                        <div class="spinner-load inner" *ngIf="events.length==0">
+                            <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="pageNumber===2" class="example-container">
+            <div class="cat-name-container">
+                <div class="sub-cat-contain">
+                    <span>Events Summary</span>
+                    <ul class="run-header">
+                        <li>Group name</li>
+                        <li>User For recommendation</li>
+                        <li>No. of Events</li>
+
+                    </ul>
+
+                    <ul class="run-list" *ngFor="let subCategory of categoryList; let i = index;">
+                        <li>{{subCategory.name}}</li>
+                        <li>{{subCategory.use_for_recommendation||'False'}}</li>
+                        <li>{{subCategory.eventList.length+1}}</li>
+                    </ul>
+                    <div class="spinner-load inner" *ngIf="!categoryList">
+                        <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()" class="cancel">Cancel</button>
+        <button mat-button (click)="previous()" *ngIf="pageNumber>0" class="previous">Previous</button>
+        <button mat-button (click)="onFormSubmit(pageNumber);next()" *ngIf="pageNumber<2" class="next">Next</button>
+        <button mat-button (click)="onFinalClick()" *ngIf="pageNumber==2" class="ok">Ok</button>
+    </div>
+</div>

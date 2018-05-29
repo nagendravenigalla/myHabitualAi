@@ -1,0 +1,59 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+    <fuse-event1-filter [event] = "eventData" [user]="userData" [userType]="chartFilterData.userType" [dashboardData]="dashboardData" (userMetricChanged)="changeOfMetric($event)" (eventDataChanged)="changeOfEventsData($event)" (saveDashboardValues)="saveDashboard($event)"></fuse-event1-filter>
+
+      <div class="chart-container">
+        <div class="filt-cont">
+          <div class="chart-filter-container">
+            <mat-radio-group [(ngModel)]="chartFilterData.selectedChart" (change)="changeChartType()">
+              <div class="chart-select-con" [ngClass]="{'con-radio-checked':chartFilterData.selectedChart==1}">
+              <mat-radio-button value="1"><span name="line-chart" class="fa fa-line-chart"></span></mat-radio-button>
+              </div>
+              <div class="chart-select-con" [ngClass]="{'con-radio-checked':chartFilterData.selectedChart==3}">
+                <mat-radio-button value="3"><span name="area-chart" class="fa fa-area-chart"></span></mat-radio-button>
+              </div>
+              <div class="chart-select-con" [ngClass]="{'con-radio-checked':chartFilterData.selectedChart==2}">
+              <mat-radio-button value="2"><span name="bar-chart" class="fa fa-bar-chart"></span></mat-radio-button>
+              </div>
+            </mat-radio-group>
+            <div class="chart-fill-date">
+              <mat-form-field [floatLabel]="'never'">
+                <mat-select [(ngModel)]="chartFilterData.granularity" (selectionChange)="changeOfGranularity($event)">
+                  <mat-option *ngFor="let granular of granulars" [value]="granular.value">
+                    {{ granular.displayValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field [floatLabel]="'never'">
+                <mat-select [(ngModel)]="chartFilterData.timeWindow" (selectionChange)="changeOfTimeWindow()">
+                  <mat-option *ngFor="let time of timeWindowDrop" [value]="time.value">
+                    {{ time.displayValue }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+        <div class="main-chart-container" *ngIf="definedChartData.length>0">
+          <fuse-line-chart [yLabel]="chartFilterData.userType" [chartType]="definedChart" [chartData]="definedChartData" *ngIf="definedChartData && definedChart==='line'||definedChart==='area'" ></fuse-line-chart>
+          <fuse-bar-chart *ngIf="definedChart==='column'" [yLabel]="chartFilterData.userType" [chartData]="definedChartData" ></fuse-bar-chart>
+        </div>
+        <div class="no-chart-container" *ngIf="definedChartData.length==0">
+          <div>
+            <div *ngIf="!showLoader">No data</div>
+            <div class="loader-container" *ngIf="showLoader">
+              <div class="loader"></div>
+            </div>
+          </div>
+      </div>
+
+      <div class="chart-container table-contain" *ngIf="definedChartData.length>0">
+        <fuse-table-chart [chartData]="tableData" (exportedAsCSV)="downloadFile($event)"></fuse-table-chart>
+      </div>
+
+
+
+</div>
+</div>
+

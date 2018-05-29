@@ -1,0 +1,23 @@
+.dialog-save {
+  background: #fff;
+  padding: 20px;
+  .dialog-button {
+    width: 100%;
+    cursor: pointer;
+    padding: 10px;
+    .but-name {
+      font-size: 12px;
+      color: #039be5;
+
+    }
+    .but-des {
+      font-size: 10px;
+      opacity: .8;
+
+    }
+
+  }
+  .dialog-button:hover {
+    border: 1px solid #00a7cf;
+  }
+}

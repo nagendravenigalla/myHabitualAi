@@ -1,0 +1,163 @@
+<div class="filter-ele">
+  <div class="filter-content" [ngClass]="{'disableFields' : !eventData.isIterable}">
+    <div class="filter-cont-eve">
+      <div *ngIf="showSelect">
+        <div class="form-group" >
+          <!--<search-drop-down class="pull-left" #itemsFormElement="ngModel" [(ngModel)]="eventData.value" [items]="events" (ngModelChange)="eventSelected($event)" [header] ="'Select Events'"></search-drop-down>-->
+          <ngx-select-dropdown [config]="config" [options]="events" [(disabled)]="!eventData.isIterable"
+                               [(value)]="eventData.value" [multiple]="false" (change)="eventSelected($event)"></ngx-select-dropdown>
+
+        </div>
+        <!--<search-drop-down name="items" class="pull-left" [(ngModel)]="eventData.value" [items]="events" required></search-drop-down>-->
+        <!--<mat-form-field [floatLabel]="'never'">
+          <mat-select placeholder="Select Events" [(ngModel)]="eventData.value" (change)="eventSelected($event)" [disabled]="!eventData.isIterable">
+            <mat-option *ngFor="let event of events" [value]="event.value">
+              {{ event.viewValue }}
+            </mat-option>
+          </mat-select>
+
+
+        </mat-form-field>-->
+      </div>
+      <div *ngIf="!showSelect">
+        <mat-form-field [floatLabel]="'never'">
+          <input matInput value="Users" [(ngModel)]="eventData.value[0].value">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="filter-cond" *ngIf="eventData.value.length>0">
+      <div class="filter-cont" (click)="copyFilter($event)" *ngIf="eventData.showCopy">
+        <span><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</span>
+        <span>Copy</span>
+      </div>
+      <div class="filter-cont" (click)="addWhere($event)" *ngIf="eventData.showWhere">
+        <span><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</span>
+        <span>Where</span>
+      </div>
+      <div class="filter-cont last-el" (click)="addGroupBy($event)" *ngIf="eventData.showGroupBy">
+        <span><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</span>
+        <span>Group by</span>
+      </div>
+      <div class="filter-cont last-el" (click)="addActionPerformed($event)" *ngIf="eventData.showActionPerformed">
+        <span><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;</span>
+        <span>Action Performed</span>
+      </div>
+      <div class="cross-del filter-cont" (click)="deleteClause($event, -1, 'events')">
+        <div><i class="fa fa-times" aria-hidden="true"></i></div>
+      </div>
+    </div>
+  </div>
+  <div class="filter-content" [ngClass]="{'disableFields' : !eventData.isIterable}">
+    <div class="where-by">
+      <div *ngFor="let where of eventData.where; let i = index" class="where-list" >
+        <div class="where-in">
+          <div>where</div>
+          <!--<div class="form-group" >
+            <search-drop-down class="pull-left"  #itemsFormElement="ngModel" [(ngModel)]="where.value" [items]="where.whereData" (ngModelChange)="whereSelected($event, i)" [header] ="'Select Property'"></search-drop-down>
+
+          </div>-->
+          <!--<mat-form-field [floatLabel]="'never'">-->
+            <ngx-select-dropdown [config]="config" [options]="where.whereData" [(disabled)]="!eventData.isIterable"
+                                 [(value)]="where.value" [multiple]="false" (change)="whereChange($event,i, where)"></ngx-select-dropdown>
+            <!--<mat-select placeholder="Select Property" [(ngModel)]="where.value" [disabled]="!eventData.isIterable" (change)="whereSelected($event, i, property)">
+              <mat-option *ngFor="let property of where.whereData" [value]="property.value" (click)="whereChange(property, where)">
+                {{ property.viewValue }}
+              </mat-option>
+            </mat-select>-->
+
+          <!--</mat-form-field>-->
+
+          <!--<mat-form-field class="operator-cl" [floatLabel]="'never'">
+            &lt;!&ndash;<mat-select [(ngModel)]="where.operator" [disabled]="!eventData.isIterable" (change)="whereOperatorSelected($event, i)">
+              <mat-option *ngFor="let operator of where.operators" [value]="operator">
+                {{ operator }}
+              </mat-option>
+            </mat-select>
+&ndash;&gt;
+          </mat-form-field>-->
+            <ngx-select-dropdown [config]="config" [options]="where.operators" [(disabled)]="!eventData.isIterable"
+                                 [(value)]="where.operator" [multiple]="false" (change)="whereOperatorSelected($event, i)"></ngx-select-dropdown>
+            <ngx-select-dropdown [config]="config" [options]="where.whereValueData" [(disabled)]="!eventData.isIterable"
+                                 [(value)]="where.param" [multiple]="true" (change)="whereValueSelected($event, i,where.param)"></ngx-select-dropdown>
+          <!--<search-drop-down class="pull-left"  #itemsFormElement="ngModel" [(ngModel)]="where.param" [items]="where.whereValueData" (ngModelChange)="whereValueSelected($event, i,where.param)" [header] ="'Select Property'"></search-drop-down>-->
+          <!--<mat-form-field [floatLabel]="'never'">
+            <mat-select [(ngModel)]="where.param" [disabled]="!eventData.isIterable" (change)="whereValueSelected($event, i)">
+              <mat-option *ngFor="let whereValue of where.whereValueData" [value]="whereValue">
+                {{ whereValue| displayName  }}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>-->
+        </div>
+        <div class="cross-del filter-cont">
+          <div (click)="deleteClause($event, i, 'where')"><i class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="filter-content" [ngClass]="{'disableFields' : !eventData.isIterable}">
+    <div class="where-by">
+      <div *ngFor="let group of eventData.groupBy; let i = index" class="where-list" >
+        <div class="where-in group-in">
+          <div>grouped by</div>
+          <!--<mat-form-field [floatLabel]="'never'">
+            <mat-select placeholder="Select Property" [disabled]="!eventData.isIterable" [(ngModel)]="group.value" (change)="groupSelected($event, i)">
+              <mat-option *ngFor="let groupProperty of group.groupData" [value]="groupProperty.value">
+                {{ groupProperty.viewValue| displayName  }}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>-->
+          <ngx-select-dropdown [config]="config" [options]="group.groupData" [(disabled)]="!eventData.isIterable"
+                               [(value)]="group.value" [multiple]="false" (change)="groupSelected($event, i)"></ngx-select-dropdown>
+        </div>
+        <div class="cross-del filter-cont">
+          <div (click)="deleteClause($event, i, 'groupBy' )"><i class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+
+  <!--<div class="filter-content" [ngClass]="{'disableFields' : !eventData.isIterable}">
+    <div class="where-by">
+      <div *ngFor="let action of eventData.actionPerformed; let i = index" class="where-list" >
+        <div class="where-in action-in">
+          <div>who performed</div>
+          <mat-form-field [floatLabel]="'never'">
+            <mat-select placeholder="Select Property" [(ngModel)]="action.value" (change)="actionSelected($event, i)">
+              <mat-option *ngFor="let actionperformed of actions" [value]="actionperformed.value">
+                {{ actionperformed.viewValue | displayName }}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+
+          <mat-form-field class="operator-cl" [floatLabel]="'never'">
+            <mat-select [(value)]="action.operator" (change)="actionOperatorSelected($event, i)">
+              <mat-option *ngFor="let operator of operators" [value]="operator">
+                {{ operator}}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+
+          <mat-form-field [floatLabel]="'never'">
+            <input matInput value="1" [(ngModel)]="action.param" (change)="actionValueSelected($event, i)">
+
+          </mat-form-field>
+        </div>
+        <div class="cross-del filter-cont action-in">
+          <div (click)="deleteClause($event, i, 'actionPerformed')"><i class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>-->
+</div>

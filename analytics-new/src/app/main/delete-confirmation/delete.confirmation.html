@@ -1,0 +1,12 @@
+<div class="dialog-save">
+    <h2>
+        Do you want to delete
+    </h2>
+    <button class="cross-sign" [mat-dialog-close]="false">
+        <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="confirm()">Ok</button>
+    </div>
+</div>

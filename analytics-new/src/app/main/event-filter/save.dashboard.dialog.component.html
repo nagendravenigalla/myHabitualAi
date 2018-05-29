@@ -1,0 +1,49 @@
+<div class="dialog-save attribute-dia-save">
+  <div class="modal-header">
+    <h2>Save As</h2>
+    <button class="cross-sign" [mat-dialog-close]="false">
+      <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+  </div>
+  <div class="example-container">
+    <div class="inner-contain">
+      <ul class="edit-fields">
+        <li>
+          <label class="label-size"> Name </label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Name" [(ngModel)]="dashboard.selectedName" [formControl]="selectedName" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && selectedName.hasError('required')">Please enter the name for a dashboard</mat-error>
+          </div>
+        </li>
+        <li>
+          <label class="label-size"> Description </label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Description" [(ngModel)]="dashboard.description" [formControl]="description" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && description.hasError('required')">Please enter the description</mat-error>
+          </div>
+        </li>
+        <li>
+          <label class="label-size"> Base Name</label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Base Name" [(ngModel)]="dashboard.baseName"  [formControl]="baseName" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && description.hasError('required')">Please enter the base name</mat-error>
+          </div>
+
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onFormSubmit()" class="ok-but">Ok</button>
+  </div>
+</div>
+

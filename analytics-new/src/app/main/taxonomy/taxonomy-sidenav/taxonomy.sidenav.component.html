@@ -1,0 +1,47 @@
+<div class="taxonomy-sidenav">
+  <div class="taxonomy-head">
+    <a class="side-bar-head" title="Events">
+      <div class="taxonomy-side">
+        <span class="taxonomy-head-sp">
+          <span>Groups</span>
+        </span>
+      </div>
+    </a>
+    <div class="side-nav-comp">
+      <ul>
+        <li [routerLinkActive]="['active']" [routerLink]="[event.url]" *ngFor="let event of events">
+          <a>{{event.name}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="taxonomy-sidenav">
+  <div class="taxonomy-head">
+    <a class="side-bar-head" title="Events">
+      <div class="taxonomy-side">
+      <span class="taxonomy-head-sp">
+        <span>Attributes</span>
+      </span>
+      </div>
+    </a>
+    <div class="side-nav-comp">
+      <ul>
+        <li [routerLinkActive]="['active']"
+            [routerLink]="['./attributes/uncategorized']">
+          <a>Uncategorized Attributes</a>
+        </li>
+        <li [routerLinkActive]="['active']"
+            [routerLink]="['./attributes/events']">
+          <a>Event Attributes</a>
+        </li>
+        <li [routerLinkActive]="['active']"
+            [routerLink]="['./attributes/user']">
+          <a>User Attributes</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

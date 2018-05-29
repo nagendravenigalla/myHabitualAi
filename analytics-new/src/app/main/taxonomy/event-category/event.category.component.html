@@ -1,0 +1,82 @@
+<div class="taxonomy-discover-table">
+    <div *ngIf="attrValue" >
+        <div class="side-nav-comp">
+            <ul>
+                <li [ngClass]="{'active': event.attr_value===selectedCategory}" *ngFor="let event of subCatList" (click)="changeEventList(event)">
+                    <a>{{event.name}}</a>
+                </li>
+            </ul>
+            <button mat-button (click)="createGroup()">Edit Group</button>
+        </div>
+    </div>
+
+    <div class="taxonomy-discover-list" *ngIf="events.length>0">
+        <!--<div class="event-header"><span>{{event}}</span></div>-->
+        <div class="taxonomy-discover-inner" *ngIf="!attrValue">
+            <div class="taxonomy-list-element" *ngFor="let event of events">
+                <div class="list-category-name">
+                    <div class="cat-name-div">
+                        <div class="cat-name">{{event.groupName}}</div>
+                    </div>
+                    <div class="eve-name">{{event.event_name}}</div>
+                </div>
+                <!--<div class="list-category-desc"></div>-->
+                <div class="list-meta" *ngIf="event.eventMeta">
+                    <table class="list-meta-tab" *ngFor="let meta of event.eventMeta">
+                        <tbody>
+                        <tr class="meta-list-ele">
+                            <td class="each-meta-ele">
+
+                                <span class="meta-name">{{meta.name}}</span>
+                            </td>
+                            <td class="meta-val">
+                                <div class="meta-val-contain">
+                                    <div class="meta-val-in">
+                                        <div class="met-value">{{meta.description}}</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="list-event-meta"></div>
+            </div>
+        </div>
+        <div *ngIf="attrValue" class="sub-cat-taxonomy">
+            <div class="taxonomy-discover-inner">
+                <div class="taxonomy-list-element" *ngFor="let event of filteredEventList">
+                    <div class="list-category-name">
+                        <div class="cat-name-div">
+                            <div class="cat-name">{{event.groupName}}</div>
+                        </div>
+                        <div class="eve-name">{{event.event_name}}</div>
+                    </div>
+                    <!--<div class="list-category-desc"></div>-->
+                    <div class="list-meta" *ngIf="event.eventMeta">
+                        <table class="list-meta-tab" *ngFor="let meta of event.eventMeta">
+                            <tbody>
+                            <tr class="meta-list-ele">
+                                <td class="each-meta-ele">
+                                    <span class="meta-name">{{meta.name}}</span>
+                                </td>
+                                <td class="meta-val">
+                                    <div class="meta-val-contain">
+                                        <div class="meta-val-in">
+                                            <div class="met-value">{{meta.description}}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="list-event-meta"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="events.length==0" class="spinner-load">
+        <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+    </div>
+</div>

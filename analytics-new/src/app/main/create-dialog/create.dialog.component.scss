@@ -1,0 +1,11 @@
+@import '../common.theme.scss';
+.event-dialog{
+  .grid-contain{
+    display:block;
+  }
+  button{
+    background: $button-background-color;
+    color: $button-color;
+    fill: $button-color;
+  }
+}

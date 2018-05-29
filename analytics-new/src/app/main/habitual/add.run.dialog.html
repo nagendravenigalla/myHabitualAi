@@ -1,0 +1,44 @@
+<div class="dialog-save recommendation-dia-save">
+  <div class="modal-header">
+    <h2>Generate Recommendation</h2>
+    <button class="cross-sign" [mat-dialog-close]="false">
+      <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+  </div>
+  <div class="example-container">
+    <div class="inner-contain">
+      <ul class="edit-fields">
+        <li>
+          <label class="label-size">Campaign Name </label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Campaign name" [(ngModel)]="addRunData.runName" [formControl]="runName" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && runName.hasError('required')">Please enter the name for a dashboard</mat-error>
+          </div>
+        </li>
+        <li>
+          <label class="label-size">Segment</label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <mat-select placeholder="Select user base" [(ngModel)]="addRunData.baseName">
+                <mat-option *ngFor="let base of baseNames" [value]="base.segment_id">
+                  {{ base.basename }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-error *ngIf="error && baseName.hasError('required')">Please enter the base name</mat-error>
+          </div>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onFormSubmit()" class="ok-but">Ok</button>
+  </div>
+</div>
+

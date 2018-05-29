@@ -1,0 +1,25 @@
+<div class="table-cont">
+  <div class="example-header">
+    <button class="export-but" (click)="exportAsCSV($event)">Export CSV</button>
+    <div class="inp-search-field">
+      <i class="fa fa-search" aria-hidden="true"></i>
+    <mat-form-field [floatLabel]="'never'">
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <ul class="tab-header">
+      <li *ngFor="let data of displayedColumns; let i = index;" [ngClass]="{'first-head': i==0, 'second-head': i==1}" (click)="sortTable(data)">
+        <div class="head-name">{{formatDate(data)}}</div>
+        <div class="fa sort-but" name="sort-asc" [ngClass]="{'fa-sort-asc':arrowName===data && reverseObject[data],'fa-sort-desc':arrowName===data && !reverseObject[data],'fa-sort':arrowName!==data}"></div>
+      </li>
+    </ul>
+    <ul *ngFor="let data of chartData.dataArray;let ind = index;" class="tab-columns" [ngClass]="{'odd-row': ind%2===0}">
+      <li *ngFor="let dat of displayedColumns; let i = index;" [ngClass]="{'first-head': i==0, 'second-head': i==1, 'odd-row': i%2===0}">
+          {{data[dat]}}
+      </li>
+    </ul>
+  </div>
+</div>

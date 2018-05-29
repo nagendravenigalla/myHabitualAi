@@ -1,0 +1,441 @@
+@import '../../common.theme';
+$radio-width: 10px;
+$radio-height: $radio-width !default;
+$radio-text-margin: 10px !default;
+$radio-top-left: 12px !default;
+$radio-margin: 8px;
+$radio-unchecked-color: rgba(255,82,82,0.87);
+$radio-checked-color: rgba(56,189,86,0.87);
+
+.dialog-save{
+  margin: 0px auto;
+  padding: 15px;
+  width: 100%;
+  display: table;
+  position: relative;
+  height: auto;
+  padding-bottom: 20px;
+  background-color: #ffffff;
+  .cross-sign{
+    position: absolute;
+    right: 1%;
+    top: 2%;
+    cursor: pointer;
+  }
+  h2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+  }
+  .int-container {
+    width: 100%;
+    border-radius: 5px;
+    .spinner-load.inner{
+      height: 120px;
+    }
+    .example-container {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 0px 20px 20px 0;
+      padding: 10px;
+      border: 1px solid #fff;
+      div {
+        width: 100%;
+        .mat-form-field {
+          width: 75%;
+          .mat-input-element {
+            color: #000;
+            margin-left: 14%;
+          }
+          .mat-input-placeholder.mat-form-field-placeholder {
+            position: relative;
+          }
+        }
+        .mat-error {
+          position: absolute;
+          font-size: 10px;
+        }
+        &.mat-add-div {
+          width: 100%;
+        }
+        &.att-label {
+          margin-bottom: 5px;
+          color: rgba(0, 0, 0, 0.54);
+        }
+        &.event-list-check {
+          height: 310px;
+          overflow: auto;
+          section {
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            div {
+              margin: 0;
+              width: 65%;
+              &.group-select-lab{
+                display: flex;
+                justify-content: center;
+              }
+            }
+            .mat-form-field {
+              width: 30%;
+            }
+          }
+        }
+        &.edit-cat-group {
+          input {
+            border: 1px solid #d7dada;
+            border-radius: 2px;
+            padding: 5px;
+            margin: 2px;
+            display: block;
+            width: 80%;
+          }
+          &.edit-sub-cat {
+            display: flex;
+            align-items: center;
+            mat-icon {
+              cursor: pointer;
+            }
+          }
+        }
+
+        &.cat-name-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 20px;
+          button {
+            cursor: pointer;
+            background-color: #03a9f4;
+            mat-icon {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+          ul {
+            margin: 5px;
+            li {
+              list-style-type: none;
+              display: flex;
+              align-items: center;
+              div {
+                margin-bottom: 0;
+              }
+              mat-icon {
+                cursor: pointer;
+              }
+              &:first-child{
+                border-left:1px solid rgba(0, 0, 0, 0.12);
+              }
+            }
+
+          }
+          .sub-cat-contain {
+            border-radius: 2px;
+            padding: 5px;
+            margin: 2px;
+            width: 100%;
+            overflow-y: scroll;
+            max-height: 300px;
+            ul {
+              width: 100%;
+              display: table;
+              margin: 0 auto;
+              padding: 0;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+              li {
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 10px;
+                font-weight: bold;
+                height: 42px;
+                text-transform: uppercase;
+                padding: 6px;
+                text-align: center;
+                border-right: 1px solid #d7dada;
+                width: 20%;
+                .edit-but {
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  cursor: pointer;
+                  &:hover {
+                    background-color: #F7F7F7;
+                  }
+                  button {
+                    cursor: pointer;
+                    mat-icon {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                    }
+                  }
+                }
+                mat-icon {
+                  &.first {
+                    margin-right: 20px;
+                  }
+                  &.check {
+                    color: #4ac95a;
+                  }
+                }
+                &:nth-child(2){
+                  width:30%;
+
+                }
+                &:nth-child(3){
+                  width:10%;
+                }
+              }
+            }
+            ul.run-header {
+              position: relative;
+              font-weight: 400;
+              top: 2px;
+              font-size: 16px;
+              color: rgba(0, 0, 0, .54);
+              border-top: 1px solid rgba(0, 0, 0, 0.12)
+              /*li:after{content: '\eaa8';}*/
+            }
+            ul.run-list {
+              position: relative;
+              li {
+                font-weight: 300;
+                &:nth-child(2), &:nth-child(1) {
+                  text-align: left;
+
+                }
+                &.actions{
+                  button {
+                    background: none;
+                    font-size: 18px;
+                    &:hover{
+                      background-color: $hover-color;
+                    }
+                  }
+                }
+              }
+            }
+            &.scroll-cont{
+              overflow-y: scroll;
+              max-height: 300px;
+              scroll-behavior: smooth;
+            }
+            .event-list-check{
+              ul {
+                li {
+                  width: 50%;
+                  &:nth-child(2){
+                    width: 50%;
+                    text-align: center;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+  .mat-dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    .mat-button {
+      color: $button-color;
+      &.next, &.ok{
+        color: $button-color;
+        background-color: $button-background-color;
+      }
+      &.previous, &.cancel{
+        color: $cancel-button-color;
+        border: $cancel-button-border;
+      }
+    }
+  }
+  .mat-dialog-actions:last-child{
+    margin: 0;
+  }
+  .attribute-rad {
+    .mat-radio-button {
+      font-size: 13px;
+      width: 35%;
+    }
+  }
+  .side-nav-comp {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    margin: 6px 12px 6px 24px;
+    padding: 6px 0;
+    color: #9da4a4;
+    font-size: 13px;
+    flex-grow: 1;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+      flex-direction: column;
+      -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      li {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+        flex-grow: 1;
+        cursor: pointer;
+        &.active {
+          a {
+            color: #00a7cf;
+            border-left-color: #00a7cf;
+          }
+        }
+        &:hover:not(.active){
+          a {
+            border-left-color: #bec5c5;
+            /*opacity: 0.4;*/
+          }
+        }
+        a {
+          -webkit-box-pack: justify;
+          -ms-flex-pack: justify;
+          justify-content: space-between;
+          border-left: 3px solid #ebeded;
+          padding: 8px 12px 8px 18px;
+          color: #004959;
+          text-decoration: none;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-flex: 1;
+          -ms-flex-positive: 1;
+          flex-grow: 1;
+
+        }
+      }
+    }
+  }
+}
+
+.dialog-save {
+  .breadcrumb {
+    width:90%;
+    /*centering*/
+    display: inline-block;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    border-radius: 5px;
+    /*Lets add the numbers for each link using CSS counters. flag is the name of the counter. to be defined using counter-reset in the parent element of the links*/
+    counter-reset: flag;
+    text-align: center;
+    margin: 4%;
+    margin-bottom: 2px;
+  }
+
+  .breadcrumb a {
+    text-decoration: none;
+    width: 33.33%;
+    outline: none;
+    display: block;
+    float: left;
+    font-size: 12px;
+    line-height: 36px;
+    color: white;
+    /*need more margin on the left of links to accomodate the numbers*/
+    padding: 0 10px 0 60px;
+    background: #666;
+    background: linear-gradient(#666, #333);
+    position: relative;
+  }
+  /*since the first link does not have a triangle before it we can reduce the left padding to make it look consistent with other links*/
+  .breadcrumb a:first-child {
+    padding-left: 46px;
+    border-radius: 5px 0 0 5px; /*to match with the parent's radius*/
+  }
+  .breadcrumb a:last-child {
+    border-radius: 0 5px 5px 0; /*this was to prevent glitches on hover*/
+    padding-right: 20px;
+  }
+
+  /*hover/active styles*/
+  .breadcrumb a.active, .breadcrumb a:hover {
+    background: #e1f0f5;
+    background: linear-gradient(#e1f0f5, #000);
+  }
+  .breadcrumb a.active:after, .breadcrumb a:hover:after {
+    background: #e1f0f5;
+    background: linear-gradient(135deg, #e1f0f5, #000);
+  }
+
+  /*adding the arrows for the breadcrumbs using rotated pseudo elements*/
+  .breadcrumb a:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -18px; /*half of square's length*/
+    /*same dimension as the line-height of .breadcrumb a */
+    width: 36px;
+    height: 36px;
+    /*as you see the rotated square takes a larger height. which makes it tough to position it properly. So we are going to scale it down so that the diagonals become equal to the line-height of the link. We scale it to 70.7% because if square's:
+    length = 1; diagonal = (1^2 + 1^2)^0.5 = 1.414 (pythagoras theorem)
+    if diagonal required = 1; length = 1/1.414 = 0.707*/
+    transform: scale(0.707) rotate(45deg);
+    /*we need to prevent the arrows from getting buried under the next link*/
+    z-index: 1;
+    /*background same as links but the gradient will be rotated to compensate with the transform applied*/
+    background: #666;
+    background: linear-gradient(135deg, #666, #333);
+    /*stylish arrow design using box shadow*/
+    box-shadow: 2px -2px 0 -1px rgba(0, 0, 0, 0.4), -2px 1px 0 0px rgba(255, 255, 255, 0.1);
+    /*
+        5px - for rounded arrows and
+        50px - to prevent hover glitches on the border created using shadows*/
+    border-radius: 0 5px 0 50px;
+  }
+  /*we dont need an arrow after the last link*/
+  .breadcrumb a:last-child:after {
+    content: none;
+  }
+
+
+  .flat a, .flat a:after {
+    background: white;
+    color: black;
+    transition: all 0.5s;
+  }
+
+  .flat a:hover, .flat a.active,
+  .flat a:hover:after, .flat a.active:after {
+    background: #e1f0f5;
+  }
+}
+
+
+
+
+
+
+
+

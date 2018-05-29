@@ -1,0 +1,75 @@
+@import "src/app/core/scss/fuse";
+
+:host {
+  width: 100%;
+  fuse-attribute-tax{
+    width: 100%;
+  }
+  .center {
+    background-color: #fbfbfb;
+    box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
+    overflow: auto;
+  .header {
+      justify-content: flex-end;
+      .search-wrapper {
+        @include mat-elevation(7);
+
+        .sidenav-toggle {
+          margin: 0;
+          width: 56px;
+          height: 56px;
+          background: #FFF;
+          border-radius: 0;
+          border-right: 1px solid rgba(0, 0, 0, .12);
+        }
+
+        .search {
+          width: 100%;
+          height: 56px;
+          line-height: 56px;
+          padding: 18px;
+          flex-direction: row;
+          box-sizing: border-box;
+          display: flex;
+          max-height: 100%;
+          place-content: center flex-start;
+          align-items: center;
+          input {
+            height: 56px;
+            padding-left: 16px;
+            color: rgba(0, 0, 0, 0.54);
+            border: none;
+            outline: none;
+          }
+        }
+      }
+    }
+
+    .content-card {
+
+      @include media-breakpoint(xs) {
+
+
+
+        &.current-mail-selected {
+
+          .toolbar {
+            padding-left: 16px !important;
+
+            .mail-selection {
+              display: none !important;
+            }
+          }
+
+          .content {
+            fuse-attribute-tax{
+              width: 100%;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+<div class="page-layout blank p-24" fusePerfectScrollbar>
+  <div class="create-dia">
+    <fuse-create-dialog></fuse-create-dialog>
+  </div>
+  <div *ngFor="let chart of charts" class="chart-list-container" (click)="goToViewChart(chart)" class="dash-each">
+    <div class="dash-head">
+      <h3>{{chart.allData.dashboardName}}</h3>
+      <h6>{{chart.allData.description}}</h6>
+      <button class="cross-sign" (click)="deleteBoard(chart, $event)">
+        <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+        <!--<i class="fa fa-times" aria-hidden="true"></i>-->
+      </button>
+    </div>
+    <div class="spinner-load inner" *ngIf="!chart.isLoaded">
+      <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+    </div>
+    <div *ngIf="chart.isLoaded">
+      <fuse-line-chart [chartType]="chart.definedChart" [chartData]="chart.definedChartData" [yLabel]="chart.chartMetric"></fuse-line-chart>
+    </div>
+  </div>
+  <div class="spinner-load" *ngIf="!dashboardLoaded">
+    <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+  </div>
+
+</div>

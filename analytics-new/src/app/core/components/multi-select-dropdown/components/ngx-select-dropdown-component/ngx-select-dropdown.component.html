@@ -1,0 +1,34 @@
+<div class="ngx-dorpdown-container">
+    <button type="button" class="ngx-dropdown-button" (click)="toggleSelectDropdown($event)">
+        <span>{{selectedDisplayText}} </span>
+        <span class="nsdicon-angle-down"></span>
+    </button>
+    <div class="ngx-dropdown-list-container" *ngIf="toggleDropdown">
+        <div>
+            <div class="search-container" *ngIf="config.search">
+                <input name="search" (ngModelChange)='changed($event)' [(ngModel)]="searchText" />
+                <label [ngClass]="{'active': searchText}">
+                    <span class="nsdicon-search"></span> Search</label>
+            </div>
+            <div class="lists-items">
+            <ul class="selected-items">
+                <li *ngFor="let selected of selectedItems;let i = index" (click)="deselectItem(selected,i)">
+                    <span class="nsdicon-close"> {{selected[config.displayKey] || selected}}</span>
+                </li>
+            </ul>
+            <hr *ngIf="selectedItems.length > 0 && availableItems.length > 0" />
+            <ul class="available-items">
+                <li *ngFor="let item of availableItems;let i = index" [ngClass]="{'active': focusedItemIndex == i}" (click)="selectItem(item,i)">
+                    <span *ngIf="item[config.displayKey]">{{item[config.displayKey]|displayName}}</span>
+                    <span *ngIf="!item[config.displayKey]">{{item|displayName}}</span>
+                </li>
+            </ul>
+            </div>
+        </div>
+        <div *ngIf="multiple" class="apply-but-contain">
+            <button type="button" class="ngx-dropdown-button apply-but" (click)="applyChangesForMultiple()">
+                Apply
+            </button>
+        </div>
+    </div>
+</div>

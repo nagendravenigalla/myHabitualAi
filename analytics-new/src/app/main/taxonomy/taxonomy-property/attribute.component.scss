@@ -1,0 +1,98 @@
+@import '../../common.theme';
+.tax-attribute-contain {
+  ul {
+    width: 100%;
+    display: table;
+    margin: 0 auto;
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    li {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 10px;
+      height: 42px;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 6px 0 6px 0;
+      width: auto;
+      &:nth-child(1) {
+        width: 5%;
+      }
+      &:nth-child(7) {
+        width: 12%;
+      }
+      &:nth-child(3), &:nth-child(5) {
+        width: 16%;
+      }
+      &:nth-child(6) {
+        width: 14%;
+      }
+      &:nth-child(4) {
+        width: 18%;
+      }
+      &:nth-child(2) {
+        width: 19%;
+      }
+      .edit-but {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        &:hover {
+          background-color: #F7F7F7;
+        }
+        button {
+          cursor: pointer;
+          mat-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  .run-head {
+    .each-list {
+      color: #6e7777;
+      &.odd-row {
+        background-color: $alternate-list-color;
+      }
+    }
+    ul.run-header {
+      position: relative;
+      top: 2px;
+
+      color: rgba(0, 0, 0, .54);
+
+      li{
+        font-weight: 600;
+        color: #6e7777;
+        font-size: 11px;
+      }
+      /*li:after{content: '\eaa8';}*/
+    }
+    ul.run-list {
+      position: relative;
+      .prog-dot-container {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+        .progress-dot {
+
+        }
+      }
+      &:hover {
+        background-color: #eee;
+        -webkit-transition-property: background;
+        transition-property: background;
+        -webkit-transition-duration: .3s;
+        transition-duration: .3s;
+        -webkit-transition-timing-function: linear;
+        transition-timing-function: linear;
+      }
+    }
+  }
+}

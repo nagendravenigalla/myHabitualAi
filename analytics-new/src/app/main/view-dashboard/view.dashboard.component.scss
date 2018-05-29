@@ -1,0 +1,35 @@
+@import '../loader.scss';
+
+  .dash-each {
+    width: 48%;
+    display: block;
+    float: left;
+    margin: 10px;
+    min-height: 468px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 0px -2px rgba(0, 0, 0, 0.2), 0 2px 0px 0 rgba(0, 0, 0, 0.14), 0 -1px 2px 0 rgba(0, 0, 0, 0.12);
+    .dash-head {
+      position: relative;
+      h3, h6 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px;
+      }
+      .cross-sign {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        right: 1%;
+        -webkit-text-fill-color: #ef6464;
+        background: #f9f5f5;
+        height: 24px;
+      }
+    }
+  }
+
+.chart-list-container {
+  .spinner-load.inner{
+    height: 150px;
+  }
+}

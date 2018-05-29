@@ -1,0 +1,82 @@
+<div class="dialog-save attribute-dia-save">
+  <div class="modal-header">
+    <h2>Edit Attribute</h2>
+    <button class="cross-sign" [mat-dialog-close]="false">
+      <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+    </button>
+  </div>
+  <div class="example-container">
+    <div class="inner-contain">
+      <ul class="edit-fields">
+        <li>
+          <label class="label-size"> Name </label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Name" [(ngModel)]="editData.name" [formControl]="name" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && name.hasError('required')">Please enter the name for a attribute</mat-error>
+          </div>
+        </li>
+        <li>
+          <label class="label-size"> Display Name </label>
+          <div class="edit-fields">
+            <mat-form-field [floatLabel]="'never'">
+              <input matInput placeholder="Display-name" [(ngModel)]="editData.displayName" [formControl]="displayName" required>
+            </mat-form-field>
+            <mat-error *ngIf="error && displayName.hasError('required')">Please enter the displayable name for attribute</mat-error>
+          </div>
+        </li>
+        <li>
+          <label class="label-size"> Attribute Visibility</label>
+          <div class="edit-fields">
+            <section class="example-section">
+              <mat-slide-toggle
+                      class="example-margin"
+                      [checked]="editData.isVisible"
+                      [(ngModel)]="editData.isVisible"
+              >
+              </mat-slide-toggle>
+            </section>
+            <mat-error *ngIf="error && (editData.isVisible == null || editData.isVisible === undefined)">Please enter if attribute is displayable</mat-error>
+          </div>
+
+        </li>
+        <li>
+          <label class="label-size"> Attribute Groupable</label>
+          <div class="edit-fields">
+            <section class="example-section">
+              <mat-slide-toggle
+                      class="example-margin"
+                      [checked]="editData.isGroupable"
+                      [(ngModel)]="editData.isGroupable"
+              >
+              </mat-slide-toggle>
+            </section>
+            <mat-error *ngIf="error && (editData.isGroupable == null || editData.isGroupable === undefined)">Please enter if attribute is groupable</mat-error>
+          </div>
+
+        </li>
+        <li>
+          <label class="label-size"> Attribute Type</label>
+          <div class="edit-fields">
+            <mat-radio-group class="example-radio-group" [(ngModel)]="editData.type">
+              <mat-radio-button class="example-radio-button" [value]="'user'">
+                User
+              </mat-radio-button>
+              <mat-radio-button class="example-radio-button" [value]="'event'">
+                Event
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="error && (editData.type == null || editData.type === undefined)">Please enter type of attribute</mat-error>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onFormSubmit()" class="ok-but">Ok</button>
+  </div>
+</div>
