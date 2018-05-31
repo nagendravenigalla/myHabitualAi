@@ -41,7 +41,8 @@ export class EventFilterComponent implements OnInit, OnChanges {
             value: [],
             where: [],
             groupBy: [],
-            actionPerformed: []
+            actionPerformed: [],
+            cancellable: false
         };
         this.eventsData.push(eventSchema);
 
@@ -55,7 +56,8 @@ export class EventFilterComponent implements OnInit, OnChanges {
             showActionPerformed: false,
             where: [],
             groupBy: [],
-            actionPerformed: []
+            actionPerformed: [],
+            cancellable: false
         };
         this.userData.push(userSchema);
 
@@ -148,9 +150,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
 
     deleteFunc(type, index, event) {
         if (event.index === -1) {
-            this[type][index].value = '';
-            this[type][index].where = [];
-            this[type][index].actionPerformed = [];
+            this[type].splice(index, 1);
         } else {
             this[type][index][event.val].splice(event.index, 1);
         }
@@ -188,6 +188,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
                             showWhere: true,
                             showGroupBy: true,
                             showActionPerformed: false,
+                            cancellable: true,
                             value: [],
                             where: [],
                             groupBy: [],

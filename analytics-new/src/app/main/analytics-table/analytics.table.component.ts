@@ -86,7 +86,7 @@ export class AnalyticsTableComponent implements OnInit, AfterViewInit, OnChanges
 
   changeReverseValuesForOthers(variable){
       for (let key in this.reverseObject) {
-          if(variable !== key) {
+          if(variable != key) {
               this.reverseObject[key] = false;
           }
       }

@@ -21,6 +21,12 @@ export class CreateCategoryComponent implements OnInit{
   categoryList:any;
   events: Array<any> = [];
   attVal: any;
+  totalEvents: Array<any> = [];
+  start: number = 0;
+  end: number = 10;
+  page: number = 1;
+  step: number = 10;
+  showNext: boolean = true;
   loaderObj = {subCatLoader: false, eventListLoader:false,sumLoader:false};
   constructor(public dialogRef: MatDialogRef<CreateCategoryComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private taxonomyService: TaxonomyService) {
       dialogRef.disableClose = true;
@@ -42,7 +48,8 @@ export class CreateCategoryComponent implements OnInit{
                       this.subCategories = response.payload;
                   });
                   this.taxonomyService.getEvents('?q=na').subscribe( response => {
-                      this.events = response.payload;
+                      this.totalEvents = response.payload;
+                      this.events = this.totalEvents.slice(this.start,this.end);
                       this.loaderObj.eventListLoader = false;
                   })
               });
@@ -124,6 +131,32 @@ export class CreateCategoryComponent implements OnInit{
 
   onFinalClick(){
     this.dialogRef.close();
+  }
+
+  changeVisibility(event,i){
+      event.showDropDown = !event.showDropDown;
+  }
+
+  previousPaginate(){
+      this.start = this.start - this.step;
+      this.end = this.end - this.step;
+      this.events = [];
+      this.events = this.totalEvents.slice(this.start,this.end);
+      --this.page;
+      this.showNext = this.page * this.start <= this.totalEvents.length;
+  }
+
+  nextPaginate(){
+      if(this.page * this.start <= this.totalEvents.length) {
+          this.start = this.start + this.step;
+          this.end = this.end + this.step;
+          this.events = [];
+          ++this.page;
+          this.events = this.totalEvents.slice(this.start, this.end);
+          this.showNext = this.page * this.start <= this.totalEvents.length;
+      }else{
+          this.showNext = false;
+      }
   }
 
   ngOnInit(){

@@ -1,25 +1,47 @@
-<div class="page-layout blank p-24" fusePerfectScrollbar>
-  <div class="create-dia">
-    <fuse-create-dialog></fuse-create-dialog>
-  </div>
-  <div *ngFor="let chart of charts" class="chart-list-container" (click)="goToViewChart(chart)" class="dash-each">
-    <div class="dash-head">
-      <h3>{{chart.allData.dashboardName}}</h3>
-      <h6>{{chart.allData.description}}</h6>
-      <button class="cross-sign" (click)="deleteBoard(chart, $event)">
-        <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
-        <!--<i class="fa fa-times" aria-hidden="true"></i>-->
-      </button>
+<div class="dash-container">
+  <div class="page-layout blank p-24" fusePerfectScrollbar>
+    <div class="create-dia">
+      <fuse-create-dialog></fuse-create-dialog>
     </div>
-    <div class="spinner-load inner" *ngIf="!chart.isLoaded">
+    <div *ngFor="let chart of charts" class="chart-list-container" (click)="goToViewChart(chart)" class="dash-each">
+      <div class="dash-head">
+        <h3>{{chart.allData.dashboardName}}</h3>
+        <h6>{{chart.allData.description}}</h6>
+        <button class="cross-sign" (click)="deleteBoard(chart, $event)">
+          <mat-icon class="s-24 mat-icon material-icons" role="img" aria-hidden="true">close</mat-icon>
+          <!--<i class="fa fa-times" aria-hidden="true"></i>-->
+        </button>
+      </div>
+      <div class="spinner-load inner" *ngIf="!chart.isLoaded">
+        <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+      </div>
+      <div *ngIf="chart.isLoaded">
+        <fuse-line-chart [chartType]="chart.definedChart" [chartData]="chart.definedChartData" [yLabel]="chart.chartMetric"></fuse-line-chart>
+      </div>
+    </div>
+    <div class="spinner-load" *ngIf="!dashboardLoaded">
       <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
     </div>
-    <div *ngIf="chart.isLoaded">
-      <fuse-line-chart [chartType]="chart.definedChart" [chartData]="chart.definedChartData" [yLabel]="chart.chartMetric"></fuse-line-chart>
+
+
+  </div>
+  <div class="page-layout blank p-24">
+    <div class="bottom">
+      <div class="left"></div>
+      <div class="right">
+        <div class="info">
+          <div class="dataTables_info" id="DataTables_Table_0_info">
+            Showing {{start}}&nbsp; - &nbsp;{{end}} of  {{totalCount}} entries
+          </div>
+        </div>
+        <div class="pagination">
+          <div class="dataTables_paginate paging_simple" id="DataTables_Table_0_paginate">
+            <a class="paginate_button previous" (click)="goToPrevious()" [ngClass]= "{'disabled':page===1}"
+            >Previous</a>
+            <a class="paginate_button next"  (click)="goToNext()" [ngClass]= "{'disabled':(end===totalCount)}">Next</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="spinner-load" *ngIf="!dashboardLoaded">
-    <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
-  </div>
-
 </div>

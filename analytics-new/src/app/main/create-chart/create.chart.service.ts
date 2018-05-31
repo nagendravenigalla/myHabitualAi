@@ -100,7 +100,6 @@ export class CreateChartService {
                     });
                 });
             });
-            console.log(newData);
         }
         return newData;
     }
@@ -113,7 +112,7 @@ export class CreateChartService {
             );
     }
 
-    exportAsCSV(data, chartType): Observable<any> {
+    exportAsCSV(data): Observable<any> {
         return this.http.post(this.exportAsCSVUrl, data)
             .pipe(
                 catchError(this.commonHelper.handleError('export table as csv ', {status: 500}))
@@ -141,7 +140,9 @@ export class CreateChartService {
                 });
                 if (eachData.analytics.response.length > 0) {
                     eachData.analytics.response[0].response_values.forEach(firstRes => {
-                        dataColumn.push(firstRes.window_id);
+                        if(dataColumn.indexOf(firstRes.window_id) === -1) {
+                            dataColumn.push(firstRes.window_id);
+                        }
                     });
                 }
             });
@@ -222,7 +223,7 @@ export class CreateChartService {
 
                         obj.name = eachEventData.value.length > 0 ? eachEventData.value[0].value : '';
                         eachEventData.where.forEach(eachData => {
-                            if (eachData.param) {
+                            if (eachData.param && eachData.param.length>0) {
                                 const filterConditions = this.fillCondition(eachData);
                                 obj.conditions.push(filterConditions);
                             }
@@ -258,13 +259,15 @@ export class CreateChartService {
 
     fillCondition(eachData) {
         const obj: CommonCondition = {fieldName: '', value: '', operator: ''};
-        const valueArray = [];
-        eachData.param.forEach(eachValue => {
-            valueArray.push(eachValue);
-        });
-        obj.fieldName = eachData.value[0].value;
-        obj.value = valueArray.join(',');
-        obj.operator = eachData.operator[0];
+        if(eachData.value) {
+            const valueArray = [];
+            eachData.param.forEach(eachValue => {
+                valueArray.push(eachValue);
+            });
+            obj.fieldName = eachData.value[0].value;
+            obj.value = valueArray.join(',');
+            obj.operator = eachData.operator[0];
+        }
         return obj;
     }
 

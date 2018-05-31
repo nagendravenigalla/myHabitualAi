@@ -86,16 +86,12 @@
             <div class="cat-name-container">
                 <div class="sub-cat-contain">
                     <div class="event-list-check">
-                        <!--<section class="example-section">
-                            <div>Event Name</div>
-                            <div class="group-select-lab">Select Group</div>
-                        </section>-->
                         <ul class="run-header">
                             <li>Event Name</li>
                             <li>Select Group</li>
 
                         </ul>
-                        <ul class="run-list" *ngFor="let event of events">
+                        <ul class="run-list" *ngFor="let event of events; let i of index">
                             <li>{{event.event_name}}</li>
                             <li>
                                 <mat-form-field [floatLabel]="'never'">
@@ -111,13 +107,19 @@
                         <div class="spinner-load inner" *ngIf="events.length==0">
                             <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
                         </div>
+                        <div mat-dialog-actions>
+                            <button mat-button (click)="previousPaginate()" *ngIf="start>0" class="cancel">Previous</button>
+                            <button mat-button (click)="nextPaginate()" class="ok" *ngIf="showNext">Next</button>
+                        </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
         <div *ngIf="pageNumber===2" class="example-container">
             <div class="cat-name-container">
-                <div class="sub-cat-contain">
+                <div class="sub-cat-contain third-contain">
                     <span>Events Summary</span>
                     <ul class="run-header">
                         <li>Group name</li>

@@ -1,4 +1,5 @@
 import * as data from '../../assets/base.config.json';
+import {Http} from "@angular/http";
 
 export class BaseConfig{
 
@@ -34,5 +35,9 @@ export class BaseConfig{
         return this.config[this.env].graphQlUrl;
     }
 }
+
+
+
+
 
 

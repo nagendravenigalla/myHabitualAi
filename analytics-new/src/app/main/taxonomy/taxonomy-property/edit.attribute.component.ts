@@ -33,7 +33,6 @@ export class EditAttributeComponent implements OnInit{
     }else{
       this.error = true;
     }
-
   }
 
   ngOnInit(){

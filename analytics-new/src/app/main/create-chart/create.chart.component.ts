@@ -52,8 +52,6 @@ export class CreateChartComponent implements OnInit {
         filters: [], group: {fields: []}, sort: {fields: [], sortOrder: 'ASC'}
     };
     gqlObject: GQLInterface = {agg_level: '', endTime: 0, startTime: 0, gqlObject: {filters: []}, commonCondition: []};
-    gqlPostObject: GQLPostObject = {request_json: this.gqlObject};
-
 
     constructor(private route: Router, public activatedRoute: ActivatedRoute,
                 private ref: ChangeDetectorRef, private chartService: CreateChartService) {
@@ -85,6 +83,8 @@ export class CreateChartComponent implements OnInit {
         this.definedChart = parseInt(this.chartFilterData.selectedChart) === 1 ? 'line' :
             parseInt(this.chartFilterData.selectedChart) === 2 ? 'column' : 'area';
         if (parseInt(this.chartFilterData.selectedChart) === 2 && parseInt(this.chartFilterData.previousSelectedChart) !== 2) {
+            this.onFilterChanges(this.eventsFilterData, this.chartFilterData.selectedChart);
+        }else if (parseInt(this.chartFilterData.previousSelectedChart) === 2){
             this.onFilterChanges(this.eventsFilterData, this.chartFilterData.selectedChart);
         }
         this.chartFilterData.previousSelectedChart = _.cloneDeep(this.chartFilterData.selectedChart);
@@ -202,27 +202,30 @@ export class CreateChartComponent implements OnInit {
     }
 
     downloadFile() {
-        /*const rqlUIObject = this.createRqlObject(this.eventsFilterData, this.chartFilterData.startTime, this.chartFilterData.endTime, this.chartFilterData.userType, 'ui');
+        const gqlObject = this.createGqlObject(this.eventsFilterData, this.chartFilterData.startTime, this.chartFilterData.endTime,this.chartFilterData.selectedChart);
+        const downloadObject = {metric: this.chartFilterData.userType, gqlObject: {request_json: gqlObject}};
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
-        this.subscription = this.chartService.exportAsCSV(rqlUIObject, 1).subscribe(response => {
-            let parsedResponse = response.text();
-            let blob = new Blob([parsedResponse], {type: 'text/csv'});
-            let url = window.URL.createObjectURL(blob);
+        this.subscription = this.chartService.exportAsCSV(downloadObject).subscribe(response =>{
+            if(response.status !== 500) {
+                let parsedResponse = response.text();
+                let blob = new Blob([parsedResponse], {type: 'text/csv'});
+                let url = window.URL.createObjectURL(blob);
 
-            if (navigator.msSaveOrOpenBlob) {
-                navigator.msSaveBlob(blob, 'Book.csv');
-            } else {
-                let a = document.createElement('a');
-                a.href = url;
-                a.download = 'Table.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
+                if (navigator.msSaveOrOpenBlob) {
+                    navigator.msSaveBlob(blob, 'Book.csv');
+                } else {
+                    let a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'Table.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                }
+                window.URL.revokeObjectURL(url);
             }
-            window.URL.revokeObjectURL(url);
-        });*/
+        });
 
     }
 

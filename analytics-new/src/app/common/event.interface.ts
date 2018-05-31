@@ -6,6 +6,7 @@ export interface EventSchema {
   showActionPerformed: boolean;
   showCopy: boolean;
   isIterable: boolean;
+  cancellable: boolean;
   where: Array<WhereData>;
   groupBy: Array<GroupData>;
   actionPerformed: Array<ActionPerformedData>;

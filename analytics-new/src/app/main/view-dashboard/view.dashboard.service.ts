@@ -22,8 +22,10 @@ export class ViewDashboardService {
         this.graphQlUrl = this.dashboardConfig.getGraphQl();
     }
 
-    getAllDashboards(): Observable<any> {
-        return this.http.get(this.dashboardBaseUrl)
+    getAllDashboards(obj): Observable<any> {
+        const url = this.dashboardBaseUrl + '?sort='+obj.sort+'&limit='+obj.limit+
+            '&order='+obj.order+'&offset='+obj.offset+'&count='+obj.count;
+        return this.http.get(url)
             .pipe(
                 catchError(this.commonHelper.handleError('getAllDashboards', []))
             );

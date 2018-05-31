@@ -160,7 +160,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
     }
 
     goToNext() {
-        if (this.runArray.length > 10) {
+        if(this.end*this.page<this.totalCount) {
             this.getData('add');
         }
     }
