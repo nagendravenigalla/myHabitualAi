@@ -22,7 +22,7 @@
       <!-- / NAVBAR: Top -->
 
         <div id="wrapper">
-
+            <mat-progress-bar *ngIf="showLoadingBar" class="loading-bar" color="accent" mode="indeterminate"></mat-progress-bar>
 
             <!-- NAVBAR: Left
             <fuse-navbar-vertical [folded]="fuseSettings.layout.navigationFolded"

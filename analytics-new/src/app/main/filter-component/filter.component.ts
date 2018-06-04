@@ -100,11 +100,15 @@ export class FiltersComponent implements OnInit, OnChanges{
     const applyProperty = property.value[0];
     where.dataType = applyProperty.dataType;
     where.tblName = applyProperty.tableName;
-      if (applyProperty.dataType === 'integer'){
-          where.operators = ['=', '<=', '>='];
-      }else{
-          where.operators = ['='];
-      }
+    if(applyProperty.dataType) {
+        if (applyProperty.dataType.toLowerCase() === 'integer') {
+            where.operators = ['=', '<=', '>='];
+        } else {
+            where.operators = ['='];
+        }
+    }else{
+        where.operators = ['=', '<=', '>='];
+    }
       this.whereSelected(property,index);
   }
 
@@ -141,7 +145,7 @@ export class FiltersComponent implements OnInit, OnChanges{
   ngOnInit(){
     this.eventData.where.forEach(eachWhere => {
       if(eachWhere.dataType) {
-          if (eachWhere.dataType !== 'integer') {
+          if (eachWhere.dataType.toLowerCase() !== 'integer') {
               eachWhere.operators = ['='];
           } else {
               eachWhere.operators = ['=', '<=', '>='];

@@ -4,7 +4,7 @@ import { FuseConfigService } from '../core/services/config.service';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {MainService} from "./main.service";
-import {Router} from '@angular/router'
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
     selector     : 'fuse-main',
@@ -16,6 +16,7 @@ export class FuseMainComponent implements OnInit, OnDestroy
 {
     onSettingsChanged: Subscription;
     fuseSettings: any;
+    showLoadingBar:boolean = false;
     @HostBinding('attr.fuse-layout-mode') layoutMode;
 
     constructor(
@@ -41,6 +42,18 @@ export class FuseMainComponent implements OnInit, OnDestroy
         {
             this.document.body.className += ' is-mobile';
         }
+
+        router.events.subscribe(
+            (event) => {
+                if ( event instanceof NavigationStart )
+                {
+                    this.showLoadingBar = true;
+                }
+                if ( event instanceof NavigationEnd )
+                {
+                    this.showLoadingBar = false;
+                }
+            });
     }
 
     ngOnInit()

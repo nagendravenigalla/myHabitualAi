@@ -45,8 +45,8 @@ export class MainService {
     }
 
     getUserInfo(){
-        const url = 'http://10.10.1.203:8000/dashboard/user_management';
-            return this.http.get(url).map(res => {
+        const userInfoUrl = this.baseConfig.getBaseChartsUrl()+'user_management';
+            return this.http.get(userInfoUrl).map(res => {
                 return res.json();
             }).pipe(catchError(
                 this.commonHelper.handleError('get user info', [])));

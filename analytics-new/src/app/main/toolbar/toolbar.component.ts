@@ -78,18 +78,6 @@ export class FuseToolbarComponent implements OnInit
 
         this.selectedLanguage = this.languages[0];
 
-        router.events.subscribe(
-            (event) => {
-                if ( event instanceof NavigationStart )
-                {
-                    this.showLoadingBar = true;
-                }
-                if ( event instanceof NavigationEnd )
-                {
-                    this.showLoadingBar = false;
-                }
-            });
-
         this.fuseConfig.onSettingsChanged.subscribe((settings) => {
             this.horizontalNav = settings.layout.navigation === 'top';
         });

@@ -1,16 +1,27 @@
 {
-  "env":"test1",
+  "env":"prod1",
   "configObj":{
-    "prod": {
+    "prod1": {
       "baseUrl": "triloq.cafyne.net",
       "habitualPort": 8017,
       "dashboardPort": 8080,
       "chartsPort": 8017,
       "base": "api/v1/",
-      "dataSourceUrl": "http://triloq.cafyne.net:18630/",
-      "kongLogout": "http://triloq.cafyne.net.203:8000/logout",
-      "goProfile": "http://triloq.cafyne.net:8080/auth/realms/3loq/account/",
+      "dataSourceUrl": "http://demo.3loq.net:18630/",
+      "kongLogout": "http://demo.3loq.net:8000/logout",
+      "goProfile": "http://demo.3loq.net:8080/auth/realms/3loq/account/",
       "graphQlUrl": "http://triloq.cafyne.net:8013/collate"
+    },
+    "prod": {
+      "baseUrl": "demo.3loq.net",
+      "habitualPort": 8000,
+      "dashboardPort": 8080,
+      "chartsPort": 8000,
+      "base": "",
+      "dataSourceUrl": "http://demo.3loq.net:18630/",
+      "kongLogout": "http://demo.3loq.net:8000/logout",
+      "goProfile": "http://demo.3loq.net:8080/auth/realms/3loq/account/",
+      "graphQlUrl": "http://demo.3loq.net:8013/collate"
     },
     "dev": {
       "baseUrl": "10.10.1.159",

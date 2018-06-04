@@ -142,23 +142,25 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     goToPrevious(){
         if(this.page>1) {
             this.paginateObj.count = false;
-            this.getData();
             this.paginateObj.offset--;
-            this.page = this.paginateObj.offset;
+            this.page = this.paginateObj.offset+1;
+            this.getData();
+
         }
     }
 
     goToNext(){
-        if(this.end*this.page<this.totalCount) {
+        if(this.step*this.page<this.totalCount) {
             this.paginateObj.count = false;
-            this.getData();
             this.paginateObj.offset++;
-            this.page = this.paginateObj.offset;
+            this.page = this.paginateObj.offset+1;
+            this.getData();
+
         }
     }
 
     getStart() {
-        const val = (this.page - 1) * this.step + 1;
+        const val = (this.page-1) * this.step + 1;
         return val;
     }
 
