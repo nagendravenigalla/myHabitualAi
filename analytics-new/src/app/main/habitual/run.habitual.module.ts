@@ -22,7 +22,10 @@ import { DeleteConfirmModule} from "../delete-confirmation/delete.confirm.module
 import { HabitualComponent} from "./habitual.component";
 import {CohortComponent} from "./cohort/cohort.component";
 import {AnalyticsChartsModule} from "../charts/charts.module";
-
+import {CreateChartService} from '../create-chart/create.chart.service';
+import { CohortService } from './cohort/cohort.service';
+//import { DateFilterModule } from '../../core/components/date-filter/dateFilter.module';
+ 
 const routes: Routes = [
   {
     path     : '',
@@ -42,6 +45,7 @@ const routes: Routes = [
     AddRunComponent,
       HabitualComponent,
       CohortComponent
+     
   ],
   imports:      [
     RouterModule.forChild(routes),
@@ -61,10 +65,11 @@ const routes: Routes = [
       MatIconModule,
       DeleteConfirmModule,
       MatProgressSpinnerModule,
-      AnalyticsChartsModule
+      AnalyticsChartsModule,
+   
   ],
    providers:   [
-     RunHabitualService
+     RunHabitualService, CohortService
    ],
   entryComponents:  [
     AddRunComponent
