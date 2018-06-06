@@ -1,0 +1,18 @@
+<div class="chart-fill-date">
+    <mat-form-field [floatLabel]="'never'">
+        <mat-select [(ngModel)]="chartFilterData.granularity" (selectionChange)="changeOfGranularity($event)">
+            <mat-option *ngFor="let gran of granular" [value]="gran.value">
+                {{ gran.displayValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field [floatLabel]="'never'">
+        <mat-select [(ngModel)]="chartFilterData.timeWindow" (selectionChange)="changeOfTimeWindow()">
+            <mat-option *ngFor="let time of timeWindowDrop" [value]="time.value">
+                {{ time.displayValue }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>
+

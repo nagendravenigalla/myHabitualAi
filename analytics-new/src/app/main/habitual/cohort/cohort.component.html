@@ -1,39 +1,20 @@
 <div>
     <div class="page-layout blank p-24">
         <div class="chart-container">
-                <div class="filt-cont">
-                    <div class="chart-fill-title">
-                            <h3>Filter</h3>
-                    </div>
-                     
-                    <div class="chart-filter-container">
-                            <div class="chart-fill-date">
-                                <mat-form-field [floatLabel]="'never'">
-                                    <mat-select [(ngModel)]="chartFilterData.granularity"  (selectionChange)="changeOfGranularity($event)">
-                                    <mat-option *ngFor="let granular of granulars" [value]="granular.value">
-                                        {{ granular.displayValue }}
-                                    </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                    
-                                <mat-form-field [floatLabel]="'never'">
-                                    <mat-select [(ngModel)]="chartFilterData.timeWindow" (selectionChange)="changeOfTimeWindow()">
-                                    <mat-option *ngFor="let time of timeWindowDrop" [value]="time.value">
-                                        {{ time.displayValue }}
-                                    </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </div>  
-                    </div>
+            <div class="filt-cont">
+                <div class="chart-fill-title">
+                    <h3>Filter</h3>
                 </div>
-                <div class="no-chart-container" *ngIf="definedChartData.length==0">
-                        <div>
-                          <div *ngIf="!showLoader">No data</div>
-                          <div class="loader-container" *ngIf="showLoader">
-                            <div class="loader"></div>
-                          </div>
+                <div class="date-filter-container">
+                    <fuse-date-octo-filter [granular]="granulars" [granularity]="chartFilterData.granularity"
+                                           [timeWindow]="chartFilterData.timeWindow" [timeWindowList]="timeWindow"
+                                           (timeWindowChanged)="changeInTimeWindow($event)"></fuse-date-octo-filter>
                 </div>
-        </div>              
-         <fuse-column-chart></fuse-column-chart>
-     </div>    
+            </div>
+            <div class="main-chart-container">
+                <fuse-column-chart></fuse-column-chart>
+            </div>
+        </div>
+
+    </div>
 </div>

@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {AnalyticsTableModule} from '../analytics-table/analytics.table.module';
 import {HttpModule, Http, Response} from '@angular/http';
 import {HttpLinkModule} from "apollo-angular-link-http";
+import { DateFilterModule} from "../../core/components/date-filter/date.filter.module";
 
 const routes: Routes = [
     {
@@ -44,7 +45,8 @@ const routes: Routes = [
         HttpClientModule,
         HttpModule,
         AnalyticsTableModule,
-        HttpLinkModule
+        HttpLinkModule,
+        DateFilterModule
 
     ],
     providers: [

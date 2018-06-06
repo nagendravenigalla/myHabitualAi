@@ -15,23 +15,7 @@
               <mat-radio-button value="2"><span name="bar-chart" class="fa fa-bar-chart"></span></mat-radio-button>
               </div>
             </mat-radio-group>
-            <div class="chart-fill-date">
-              <mat-form-field [floatLabel]="'never'">
-                <mat-select [(ngModel)]="chartFilterData.granularity" (selectionChange)="changeOfGranularity($event)">
-                  <mat-option *ngFor="let granular of granulars" [value]="granular.value">
-                    {{ granular.displayValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-
-              <mat-form-field [floatLabel]="'never'">
-                <mat-select [(ngModel)]="chartFilterData.timeWindow" (selectionChange)="changeOfTimeWindow()">
-                  <mat-option *ngFor="let time of timeWindowDrop" [value]="time.value">
-                    {{ time.displayValue }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
+            <fuse-date-octo-filter [granular]="granulars" [granularity]="chartFilterData.granularity" [timeWindow]="chartFilterData.timeWindow" [timeWindowList]="timeWindow" (timeWindowChanged)="changeInTimeWindow($event)"></fuse-date-octo-filter>
           </div>
 
         </div>

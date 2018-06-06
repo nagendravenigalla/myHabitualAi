@@ -47,10 +47,6 @@ export class CreateChartComponent implements OnInit {
         endTime: 0
     };
     tableData = {columnArray: [], dataArray: []};
-    rql: PostbodyInterface = {
-        entity: 'user_event_view_month', fields: [], aggregate: {aggregateType: '', column: ''},
-        filters: [], group: {fields: []}, sort: {fields: [], sortOrder: 'ASC'}
-    };
     gqlObject: GQLInterface = {agg_level: '', endTime: 0, startTime: 0, gqlObject: {filters: []}, commonCondition: []};
 
     constructor(private route: Router, public activatedRoute: ActivatedRoute,
@@ -63,19 +59,12 @@ export class CreateChartComponent implements OnInit {
     allData: any = [];
     eventsFilterData: any = {};
 
+    changeInTimeWindow(event){
 
-    changeOfGranularity($event) {
-        this.timeWindowDrop = this.timeWindow[$event.value];
-        this.chartFilterData.timeWindow = this.timeWindowDrop[0].value;
-        this.chartFilterData.startTime = this.chartService.getStartTime(this.chartFilterData);
-        this.chartFilterData.endTime = this.chartService.getEndTime(this.chartFilterData);
-        this.setEntity();
-        this.onFilterChanges(this.eventsFilterData, this.chartFilterData.selectedChart);
-    }
-
-    changeOfTimeWindow() {
-        this.chartFilterData.startTime = this.chartService.getStartTime(this.chartFilterData);
-        this.chartFilterData.endTime = this.chartService.getEndTime(this.chartFilterData);
+        this.chartFilterData.timeWindow = event.data.timeWindow;
+        this.chartFilterData.granularity = event.data.granularity;
+        this.chartFilterData.startTime = event.data.startTime;
+        this.chartFilterData.endTime = event.data.endTime;
         this.onFilterChanges(this.eventsFilterData, this.chartFilterData.selectedChart);
     }
 
@@ -178,19 +167,6 @@ export class CreateChartComponent implements OnInit {
 
             });
         }
-
-    }
-
-    setEntity() {
-        let entityName = '';
-        if (this.chartFilterData.granularity === 'monthly') {
-            entityName = 'user_event_view_month';
-        } else if (this.chartFilterData.granularity === 'weekly') {
-            entityName = 'user_event_view_week';
-        } else {
-            entityName = 'user_event_view_day';
-        }
-        this.rql.entity = entityName;
 
     }
 

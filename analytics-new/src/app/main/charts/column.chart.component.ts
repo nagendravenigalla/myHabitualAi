@@ -65,7 +65,6 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
             data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
         }];
-        /*const ylabel = this.yLabel === 'user_id' ? 'Unique Users' : 'Transacton Count';*/
         this.chart = new Chart({
             chart: {
                 type: 'column'
@@ -88,18 +87,30 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                     'Nov',
                     'Dec'
                 ],
-                crosshair: true
+
+                crosshair: true,
+                plotLines: [{
+                    color: 'black',
+                    dashStyle: 'dot',
+                    width: 2,
+                    value: this.chartData.length/2,
+                    zIndex: 3,
+                    label: {
+                        align: 'right',
+                        rotation: 0,
+                        text: 'Recommendation Sent',
+                        x: -10
+                    },
+                }]
+
             },
             yAxis: {
                 min: 0,
                 title: {
                     text: 'Rainfall (mm)'
-                }
+                },
             },
             credits: {
-                enabled: false
-            },
-            legend: {
                 enabled: false
             },
             plotOptions: {

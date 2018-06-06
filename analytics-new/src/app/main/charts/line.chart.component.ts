@@ -77,7 +77,14 @@ export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
                 },
                 title: {
                     text: 'Duration'
-                }
+                },
+                plotLines: [{
+                    color: 'black',
+                    dashStyle: 'dot',
+                    width: 2,
+                    value: 50,
+                    zIndex: 3
+                }]
             },
             legend: {
                 align: 'center',
