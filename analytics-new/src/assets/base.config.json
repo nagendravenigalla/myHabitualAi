@@ -1,5 +1,5 @@
 {
-  "env":"prod1",
+  "env":"test1",
   "configObj":{
     "prod1": {
       "baseUrl": "triloq.cafyne.net",

@@ -11,7 +11,6 @@ import {CreateChartService} from './create.chart.service';
 import {HttpClientModule} from '@angular/common/http';
 import {AnalyticsTableModule} from '../analytics-table/analytics.table.module';
 import {HttpModule, Http, Response} from '@angular/http';
-import {OctDropdownModule} from '../../core/components/oct-drop-down/oct.dropdown.module';
 import {HttpLinkModule} from "apollo-angular-link-http";
 
 const routes: Routes = [
@@ -45,7 +44,6 @@ const routes: Routes = [
         HttpClientModule,
         HttpModule,
         AnalyticsTableModule,
-        OctDropdownModule,
         HttpLinkModule
 
     ],

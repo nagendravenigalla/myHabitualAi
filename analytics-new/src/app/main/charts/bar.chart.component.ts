@@ -57,7 +57,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
         }
       },
       yAxis: {
-        type: 'logarithmic',
         title: {
           text: ylabel
         }
