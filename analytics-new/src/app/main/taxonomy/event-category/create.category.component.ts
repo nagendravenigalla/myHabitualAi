@@ -56,14 +56,14 @@ export class CreateCategoryComponent implements OnInit{
           }
       }else if(s === 1){
           this.loaderObj.sumLoader = true;
-          const objectArray = {'objects':[]};
+          const objectArray = {'category':[]};
           this.subCategories.forEach(subCategory => {
               const obj = {recommendation_id : '',event_list:[], attr_id:this.attVal};
               obj.recommendation_id = subCategory.recommendation_id;
-              objectArray.objects.push(obj);
+              objectArray.category.push(obj);
           });
           this.events.forEach(event => {
-              objectArray.objects.forEach(subCategoryObj => {
+              objectArray.category.forEach(subCategoryObj => {
                   if (event.groupName === subCategoryObj.recommendation_id){
                       subCategoryObj.event_list.push(event.event_id)
                   }

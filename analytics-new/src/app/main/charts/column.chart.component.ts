@@ -12,8 +12,6 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
     chartData: any;
     chart: any;
     show = false;
-    /*@Input() yLabel: string;*/
-
     constructor(private ref: ChangeDetectorRef){
         this.chartData = [{
             name: 'John',

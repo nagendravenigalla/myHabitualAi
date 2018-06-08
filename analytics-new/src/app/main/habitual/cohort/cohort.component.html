@@ -12,7 +12,17 @@
                 </div>
             </div>
             <div class="main-chart-container">
-                <fuse-column-chart></fuse-column-chart>
+                <mat-card>
+                    <mat-card-content>
+                        <mat-tab-group class="demo-tab-group">
+                            <mat-tab label={{row.name}} *ngFor="let row of rows">
+                                <div class="demo-tab-content">
+                                    <fuse-chart-cohort [type]="row.type" [data]="row.data"></fuse-chart-cohort>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-card-content>
+                </mat-card>
             </div>
         </div>
 
