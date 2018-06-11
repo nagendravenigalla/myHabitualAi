@@ -172,7 +172,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
     }
 
     viewChart(run){
-        this.router.navigate(['campaigns/comparison']);
+        this.router.navigate(['campaigns/comparison', run.schedule_id]);
     }
 
     getData(operator = null) {

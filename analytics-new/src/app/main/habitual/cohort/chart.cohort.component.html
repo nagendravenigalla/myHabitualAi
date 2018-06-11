@@ -2,7 +2,7 @@
     <div *ngIf="type==='column'">
         <fuse-column-chart></fuse-column-chart>
     </div>
-    <div *ngIf="type==='line'">
-        <fuse-line-chart ></fuse-line-chart>
+    <div *ngIf="type ==='line'">
+        <fuse-line-chart [chartData] = "cdata" [chartType] = "data.graph_type"></fuse-line-chart>
     </div>
 </div>

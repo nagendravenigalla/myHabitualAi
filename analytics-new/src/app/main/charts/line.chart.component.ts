@@ -98,7 +98,9 @@ export class LineChartComponent implements OnInit, AfterViewInit, OnChanges {
                 shared: true
             },
             series: this.chartData
+            
         });
+        
     }
 
 

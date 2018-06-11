@@ -14,6 +14,30 @@ export class CohortService {
         this.commonHelper = new CommonHelper();
     }
 
+    getCohortData(){
+        const url = 'http://demo.3loq.net:8013/cohortTabs';
+        return this.http.get(url);
+    }
+    cohortDataReq(obj){
+        const url = 'http://demo.3loq.net:8013/cohorts';
+        const req = this.http.post(url, 
+            {
+                "segment_id" : 12,
+                "granularity" : "month",
+                "period" : 3,
+                "graph_type" : obj.graph_type,
+                "metric_type" : obj.metric_type
+
+            }
+        ).subscribe(res => {
+            console.log(res);
+        },
+        err => {
+            console.log("error");
+        }
+        )
+    }
+
     getChartDataFormat(data, type, userType) {
         if (type === 1 || type === 3) {
             return this.lineChartFormat(data, userType);
