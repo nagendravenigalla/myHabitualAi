@@ -14,6 +14,8 @@ import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.modu
 import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
 import { MainService} from "./main.service";
 import { CookieModule } from 'ngx-cookie';
+import { HttpLogoutInterceptor } from '../common/httpInterceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -32,15 +34,14 @@ import { CookieModule } from 'ngx-cookie';
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,
-        CookieModule.forRoot()
-
-
+        CookieModule.forRoot(),
+        HttpClientModule
     ],
     exports     : [
         FuseMainComponent
     ],
     providers   : [
-        MainService
+        MainService, { provide: HTTP_INTERCEPTORS, useClass: HttpLogoutInterceptor, multi: true }
     ]
 })
 

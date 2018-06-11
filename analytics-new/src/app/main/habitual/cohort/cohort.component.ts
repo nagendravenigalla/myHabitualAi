@@ -143,9 +143,6 @@ export class CohortComponent {
         //this.cohortService.cohortDataReq(obj);
     }
 
-
-
-
     ngOnInit(){
         this.getCohortData()
     }

@@ -9,6 +9,7 @@ export class BaseConfig{
 
     getBaseHabitualUrl(): string{
         return 'http://' + this.config[this.env].baseUrl + ':' + this.config[this.env].habitualPort + '/'+this.config[this.env].base+'habitual-engine/';
+        
     }
 
     getBaseDashboardUrl(): string{
@@ -33,6 +34,13 @@ export class BaseConfig{
 
     getGraphQl(): string{
         return this.config[this.env].graphQlUrl;
+    }
+    getCohortTabUrl(): string{
+        return this.config[this.env].cohortTabsUrl;
+    
+    }
+    getCohortUrl(): string{
+        return this.config[this.env].cohortUrl;
     }
 }
 

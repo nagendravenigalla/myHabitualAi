@@ -10,7 +10,9 @@
       "dataSourceUrl": "http://demo.3loq.net:18630/",
       "kongLogout": "http://demo.3loq.net:8000/logout",
       "goProfile": "http://demo.3loq.net:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://triloq.cafyne.net:8013/collate"
+      "graphQlUrl": "http://triloq.cafyne.net:8013/collate",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     },
     "prod": {
       "baseUrl": "demo.3loq.net",
@@ -21,7 +23,9 @@
       "dataSourceUrl": "http://demo.3loq.net:18630/",
       "kongLogout": "http://demo.3loq.net:8000/logout",
       "goProfile": "http://demo.3loq.net:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://demo.3loq.net:8013/collate"
+      "graphQlUrl": "http://demo.3loq.net:8013/collate",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     },
     "dev": {
       "baseUrl": "10.10.1.159",
@@ -32,7 +36,9 @@
       "dataSourceUrl": "http://10.10.1.203:18630/",
       "kongLogout": "http://10.10.1.203:8000/logout",
       "goProfile": "http://10.10.1.202:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://10.10.1.201:8013/graphql"
+      "graphQlUrl": "http://10.10.1.201:8013/graphql",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     },
     "local": {
       "baseUrl": "localhost",
@@ -43,7 +49,9 @@
       "dataSourceUrl": "http://10.10.1.203:18630/",
       "kongLogout": "http://10.10.1.203:8000/logout",
       "goProfile": "http://10.10.1.202:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://10.10.1.201:8013/graphql"
+      "graphQlUrl": "http://10.10.1.201:8013/graphql",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     },
     "test": {
       "baseUrl": "10.10.1.203",
@@ -54,7 +62,9 @@
       "dataSourceUrl": "http://10.10.1.203:18630/",
       "kongLogout": "http://10.10.1.203:8000/logout",
       "goProfile": "http://10.10.1.202:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://10.10.1.201:8013/collate"
+      "graphQlUrl": "http://10.10.1.201:8013/collate",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     },
     "test1": {
       "baseUrl": "10.10.1.201",
@@ -65,7 +75,9 @@
       "dataSourceUrl": "http://10.10.1.203:18630/",
       "kongLogout": "http://10.10.1.203:8000/logout",
       "goProfile": "http://10.10.1.202:8080/auth/realms/3loq/account/",
-      "graphQlUrl": "http://10.10.1.201:8013/collate"
+      "graphQlUrl": "http://10.10.1.201:8013/collate",
+      "cohortTabsUrl": "http://demo.3loq.net:8013/cohortTabs",
+      "cohortUrl": "http://demo.3loq.net:8013/cohorts"
     }
   }
 }

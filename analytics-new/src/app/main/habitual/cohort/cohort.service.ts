@@ -5,21 +5,29 @@ import {catchError, map, tap} from 'rxjs/operators';
 import * as _ from 'lodash';
 import {LineChartInterface} from '../../../common/line.chart.interface';
 import {CommonHelper} from "../../../common/common.helper";
+import { BaseConfig} from "../../../common/base.config";
 
 @Injectable()
 export class CohortService {
 
+    private cohortTabUrl = "";
+    private cohortUrl = "";
+    baseConfig : BaseConfig;
+
     commonHelper: CommonHelper;
     constructor(private http: Http) {
+        this.baseConfig = new BaseConfig();
         this.commonHelper = new CommonHelper();
+        this.cohortTabUrl = this.baseConfig.getCohortTabUrl();
+        this.cohortUrl = this.baseConfig.getCohortUrl();
     }
 
     getCohortData(){
-        const url = 'http://demo.3loq.net:8013/cohortTabs';
+        const url = this.cohortTabUrl;
         return this.http.get(url);
     }
     cohortDataReq(obj){
-        const url = 'http://demo.3loq.net:8013/cohorts';
+        const url = this.cohortUrl;
         const req = this.http.post(url, 
             {
                 "segment_id" : 12,
