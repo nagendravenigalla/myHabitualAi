@@ -36,7 +36,7 @@ const routes: Routes = [
         component: HabitualComponent,
         children: [
             {path: '', redirectTo: 'habitual', pathMatch: 'full'},
-            {path: 'comparison', component: CohortComponent},
+            {path: 'comparison/:id', component: CohortComponent},
             {path: 'habitual', component: RunHabitualComponent},
 
         ],
@@ -74,7 +74,8 @@ const routes: Routes = [
 
     ],
     providers: [
-        RunHabitualService, CohortService
+        RunHabitualService, CohortService, 
+    
     ],
     entryComponents: [
         AddRunComponent

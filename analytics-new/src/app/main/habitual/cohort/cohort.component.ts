@@ -9,6 +9,9 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 
 export class CohortComponent {
+
+    cohortData : Array<any> = [];
+
     chartFilterData: any = {
         granularity: 'monthly',
         timeWindow: '12',
@@ -106,17 +109,45 @@ export class CohortComponent {
         }
         ];
 
-    rows: Array<any> = [{name: 'First name', type: 'line', data: this.data}, {name: 'Second name', type: 'column', data: this.data}]
+    rows: Array<any> = [{name: 'first', type: 'line', data: this.data}, 
+                        {name: 'Second name', type: 'column', data: this.data}]
 
     constructor(private cohortService: CohortService, private route: Router, public activatedRoute: ActivatedRoute) {
 
     }
+
+    
 
     changeInTimeWindow(event) {
         this.chartFilterData.timeWindow = event.data.timeWindow;
         this.chartFilterData.granularity = event.data.granularity;
         this.chartFilterData.startTime = event.data.startTime;
         this.chartFilterData.endTime = event.data.endTime;
+    }
+
+    getCohortData(){
+        this.cohortService.getCohortData().subscribe(response => {
+            const res = response.json();
+
+            if(res.data){
+                res.data.forEach(eachres => {
+                    this.cohortData.push(eachres)
+                    
+                })
+            }
+            
+        });
+    }
+
+    reqCohortTabs(obj){
+        //this.cohortService.cohortDataReq(obj);
+    }
+
+
+
+
+    ngOnInit(){
+        this.getCohortData()
     }
 
 
