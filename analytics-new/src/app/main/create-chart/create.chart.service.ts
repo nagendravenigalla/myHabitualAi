@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {catchError, map, tap} from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -21,7 +20,7 @@ export class CreateChartService {
     chartConfig: ChartConfig;
     commonHelper: CommonHelper;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.chartConfig = new ChartConfig();
         this.commonHelper = new CommonHelper();
         this.dashboardBaseUrl = this.chartConfig.getUrl('segment');

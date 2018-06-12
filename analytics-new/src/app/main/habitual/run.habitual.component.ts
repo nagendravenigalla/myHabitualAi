@@ -191,7 +191,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
             this.clearPollInterval();
             this.loaded = true;
             if (response.status !== 0 && response.status !== 500) {
-                this.runData = response.json();
+                this.runData = response;
                 this.runArray = [];
                 this.totalCount = this.runData.payload.total;
                 for (let [key, val] of Object.entries(this.runData.payload)) {

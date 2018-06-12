@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {CommonHelper} from "../../../common/common.helper";
 
 @Injectable()
@@ -7,7 +7,7 @@ export class DateFilterService {
 
     commonHelper: CommonHelper;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.commonHelper = new CommonHelper();
     }
 

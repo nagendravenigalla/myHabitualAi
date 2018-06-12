@@ -1,6 +1,5 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Http } from '@angular/http';
 import { Observable} from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { HabitualConfig} from './habitual.config';
@@ -16,7 +15,7 @@ export class RunHabitualService
   private exportAsCSVUrl = '';
   habitualConfig: HabitualConfig;
   commonHelper: CommonHelper;
-  constructor(private http: Http, private httpClient: HttpClient) {
+  constructor(private http: HttpClient) {
     this.habitualConfig = new HabitualConfig();
     this.commonHelper = new CommonHelper();
     this.getRunDataUrl = this.habitualConfig.getUrl('tasks');

@@ -109,14 +109,14 @@ export class CohortComponent {
         }
         ];
 
-    rows: Array<any> = [{name: 'first', type: 'line', data: this.data}, 
+    rows: Array<any> = [{name: 'first', type: 'line', data: this.data},
                         {name: 'Second name', type: 'column', data: this.data}]
 
     constructor(private cohortService: CohortService, private route: Router, public activatedRoute: ActivatedRoute) {
 
     }
 
-    
+
 
     changeInTimeWindow(event) {
         this.chartFilterData.timeWindow = event.data.timeWindow;
@@ -127,15 +127,15 @@ export class CohortComponent {
 
     getCohortData(){
         this.cohortService.getCohortData().subscribe(response => {
-            const res = response.json();
+            const res = response;
 
-            if(res.data){
-                res.data.forEach(eachres => {
+            if(res['data']){
+                res['data'].forEach(eachres => {
                     this.cohortData.push(eachres)
-                    
+
                 })
             }
-            
+
         });
     }
 

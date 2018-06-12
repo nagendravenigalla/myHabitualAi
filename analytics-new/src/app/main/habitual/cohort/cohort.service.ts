@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {catchError, map, tap} from 'rxjs/operators';
 import * as _ from 'lodash';
@@ -15,7 +15,7 @@ export class CohortService {
     baseConfig : BaseConfig;
 
     commonHelper: CommonHelper;
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.baseConfig = new BaseConfig();
         this.commonHelper = new CommonHelper();
         this.cohortTabUrl = this.baseConfig.getCohortTabUrl();
@@ -28,7 +28,7 @@ export class CohortService {
     }
     cohortDataReq(obj){
         const url = this.cohortUrl;
-        const req = this.http.post(url, 
+        const req = this.http.post(url,
             {
                 "segment_id" : 12,
                 "granularity" : "month",

@@ -68,7 +68,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
         this.dashboardLoaded = false;
         this.viewDashboardService.getAllDashboards(this.paginateObj).subscribe(response => {
             this.dashboardLoaded = true;
-            const result = response.json();
+            const result = response;
             if (result.payload && result.payload.data) {
                 if(this.paginateObj.count && result.payload.count) {
                     this.totalCount = result.payload.count;
@@ -77,7 +77,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                     const obj = {
                         definedChart: 'line',
                         definedChartData: [],
-                       
+
                         id: eachResponse.segment_hash,
                         chartId: eachResponse.segment_id,
                         allData: eachResponse.segment_ql
@@ -89,11 +89,11 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                     if (eachChart.allData) {
                         const subscription = this.viewDashboardService.getChartDataFromGraphQl(eachChart.allData.graphQl).subscribe(resp => {
                             if (resp.status !== 500) {
-                                let allData = resp.json();
+                                let allData = resp;
                                 if (allData.error) {
                                     eachChart.isLoaded = true;
                                     eachChart.definedChartData = [];
-                                    debugger                																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
+                                    debugger
                                 } else {
                                     if (allData.data) {
                                         allData = _.cloneDeep(allData.data);

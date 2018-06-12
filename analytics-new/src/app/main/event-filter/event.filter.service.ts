@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class EventFilterService {
     private eventNameData: any;
     private getAttributesUrl: string;
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient) {
         this.eventConfig = new EventConfig();
         this.commonHelper = new CommonHelper();
         this.attributesUrl = this.eventConfig.getUrl('info');
@@ -114,7 +114,7 @@ export class EventFilterService {
     getDistAttributeValues(type, attr_id): Observable<any> {
         const url = this.attributesUrl+type+'?attr_id='+attr_id;
         return this.http.get(url).map(res => {
-            return res.json();
+
         }).pipe(
             catchError(this.commonHelper.handleError('getEventAttributes', []))
         );
@@ -123,14 +123,14 @@ export class EventFilterService {
     getAttributes(attrType): Observable<any> {
         const url = this.getAttributesUrl + '/' + attrType;
         return this.http.get(url).map(res => {
-            return res.json();
+
         }).pipe(catchError(
             this.commonHelper.handleError('get Attributes', [])));
     }
 
     getGroupableAttributes(): Observable<any> {
         return this.http.get(this.groupableUrl).map(res => {
-            return res.json();
+
         }).pipe(
             catchError(this.commonHelper.handleError('getGroupableAttributes', []))
         );
@@ -146,9 +146,9 @@ export class EventFilterService {
         const url = this.attributeValuesUrl+'?col='+colName+'&tbl='+tblName;
         return this.http.get(url).map(res => {
             if (colName === 'event_name' && !this.eventNameData) {
-                this.eventNameData = res.json();
+                this.eventNameData = res;
             }
-            return res.json();
+            return res;
         }).pipe(
             catchError(this.commonHelper.handleError('getHeroes', []))
         );
