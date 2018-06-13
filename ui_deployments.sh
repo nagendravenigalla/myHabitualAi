@@ -2,7 +2,7 @@
 
 
 # Exit immediately on error
-#set -e
+set -e
 
 # Detect whether output is piped or not.
 [[ -t 1 ]] && piped=0 || piped=1
@@ -117,8 +117,8 @@ sudo touch /etc/nginx/sites-available/default
 sudo tee -a /etc/nginx/sites-available/default << EOF
 
 server {
-        listen 8080 default_server;
-        listen [::]:8080 default_server;
+        listen 80 default_server;
+        listen [::]:80 default_server;
   root /usr/share/nginx/html/octopus-ui/;
   index index.html index.htm index.nginx-debian.html;
 
