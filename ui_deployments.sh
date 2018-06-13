@@ -93,7 +93,7 @@ git clone http://$gituser:$gitpass@github.com/3LOQ/eagle-alpha.git
 
 cd eagle-alpha
 
-git checkout alpha-ui
+git checkout staging
 
 cd analytics-new
 
