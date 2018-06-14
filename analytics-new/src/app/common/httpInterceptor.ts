@@ -10,9 +10,12 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
+import { MainService } from '../main/main.service';
 
 @Injectable()
 export class HttpLogoutInterceptor implements HttpInterceptor {
+
+    constructor(private mainService: MainService){}
   intercept(
     request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
@@ -22,16 +25,16 @@ export class HttpLogoutInterceptor implements HttpInterceptor {
           'authorization' : 'bearer'
         }
     });
-
+    console.log(hreq);
       return next.handle(request).do((event: HttpEvent<any>) => {
           if (event instanceof HttpResponse) {
-              // do stuff with response if you want
+           console.log('processing response',event);
           }
       }, (err: any) => {
           if (err instanceof HttpErrorResponse) {
-              if (err.status === 401) {
-                  // redirect to the login route
-                  // or show a modal
+              if (err.status === 302) {
+                 this.mainService.logOutOfPage();
+                  
               }
           }
       });
