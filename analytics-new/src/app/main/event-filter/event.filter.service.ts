@@ -113,25 +113,19 @@ export class EventFilterService {
 
     getDistAttributeValues(type, attr_id): Observable<any> {
         const url = this.attributesUrl+type+'?attr_id='+attr_id;
-        return this.http.get(url).map(res => {
-
-        }).pipe(
+        return this.http.get(url).pipe(
             catchError(this.commonHelper.handleError('getEventAttributes', []))
         );
     }
 
     getAttributes(attrType): Observable<any> {
         const url = this.getAttributesUrl + '/' + attrType;
-        return this.http.get(url).map(res => {
-
-        }).pipe(catchError(
+        return this.http.get(url).pipe(catchError(
             this.commonHelper.handleError('get Attributes', [])));
     }
 
     getGroupableAttributes(): Observable<any> {
-        return this.http.get(this.groupableUrl).map(res => {
-
-        }).pipe(
+        return this.http.get(this.groupableUrl).pipe(
             catchError(this.commonHelper.handleError('getGroupableAttributes', []))
         );
     }
