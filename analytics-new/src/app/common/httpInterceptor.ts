@@ -10,12 +10,12 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
-import { MainService } from '../main/main.service';
+import {  BaseConfig} from './base.config';
 
 @Injectable()
 export class HttpLogoutInterceptor implements HttpInterceptor {
 
-    constructor(private mainService: MainService){}
+    constructor(private baseConfig: BaseConfig){}
   intercept(
     request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
@@ -33,7 +33,8 @@ export class HttpLogoutInterceptor implements HttpInterceptor {
       }, (err: any) => {
           if (err instanceof HttpErrorResponse) {
               if (err.status === 302) {
-                 this.mainService.logOutOfPage();
+                 const url = this.baseConfig.goToProfile();
+                window.location.href = url;
                   
               }
           }
