@@ -14,8 +14,12 @@ import { BaseConfig } from './base.config';
 
 @Injectable()
 export class HttpLogoutInterceptor implements HttpInterceptor {
+    private baseConfig: BaseConfig;
+    constructor(){
+        this.baseConfig = new BaseConfig();
+    }
 
-    constructor(private baseConfig: BaseConfig){}
+   
   intercept(
     request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
@@ -33,7 +37,9 @@ export class HttpLogoutInterceptor implements HttpInterceptor {
       }, (err: any) => {
           if (err instanceof HttpErrorResponse) {
               if (err.status === 302) {
+
                  const url = this.baseConfig.goToProfile();
+
 
                 window.location.href = url;
                   
