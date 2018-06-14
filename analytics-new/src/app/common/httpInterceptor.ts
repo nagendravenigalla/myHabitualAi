@@ -14,8 +14,10 @@ import {  BaseConfig} from './base.config';
 
 @Injectable()
 export class HttpLogoutInterceptor implements HttpInterceptor {
-
-    constructor(private baseConfig: BaseConfig){}
+    private baseConfig: BaseConfig;
+    constructor(){
+        this.baseConfig = new BaseConfig();
+    }
   intercept(
     request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
