@@ -18,6 +18,7 @@ export class HttpLogoutInterceptor implements HttpInterceptor {
     constructor(){
         this.baseConfig = new BaseConfig();
     }
+
   intercept(
     request: HttpRequest<any>, next: HttpHandler ): Observable<HttpEvent<any>> {
 
@@ -36,6 +37,7 @@ export class HttpLogoutInterceptor implements HttpInterceptor {
           if (err instanceof HttpErrorResponse) {
               if (err.status === 302) {
                 const url = this.baseConfig.goToProfile();
+
                 window.location.href = url;
                   
               }
