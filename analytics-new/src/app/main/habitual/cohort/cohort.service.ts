@@ -9,10 +9,11 @@ import { BaseConfig} from "../../../common/base.config";
 
 @Injectable()
 export class CohortService {
-
+    public newCharts: Array<any>;
     private cohortTabUrl = "";
     private cohortUrl = "";
     baseConfig : BaseConfig;
+    isLoaded: boolean = true;
 
     commonHelper: CommonHelper;
     constructor(private http: Http) {
@@ -22,13 +23,13 @@ export class CohortService {
         this.cohortUrl = this.baseConfig.getCohortUrl();
     }
 
-    getCohortData(){
+    getCohortTabsData(){
         const url = this.cohortTabUrl;
         return this.http.get(url);
     }
     cohortDataReq(obj){
         const url = this.cohortUrl;
-        const req = this.http.post(url, 
+        return this.http.post(url, 
             {
                 "segment_id" : 12,
                 "granularity" : "month",
@@ -37,19 +38,17 @@ export class CohortService {
                 "metric_type" : obj.metric_type
 
             }
-        ).subscribe(res => {
-            console.log(res);
-        },
-        err => {
-            console.log("error");
-        }
         )
     }
 
+    getChart(data, userType) {
+        return this.lineChartFormat(data, userType);
+    }
+
     getChartDataFormat(data, type, userType) {
-        if (type === 1 || type === 3) {
+        if (type === "line") {
             return this.lineChartFormat(data, userType);
-        } else if (type === 2) {
+        } else if (type === "column") {
             return this.barChartFormat(data, userType);
         }
 
@@ -58,53 +57,63 @@ export class CohortService {
 
     lineChartFormat(data, userType) {
         const newData: Array<LineChartInterface> = [];
-        if (data) {
-            data.forEach(eachData => {
-                eachData.analytics.response.forEach(eachAnalysis => {
-                    const obj: LineChartInterface = {'name': eachData.event_name, data: []};
-                    if (eachAnalysis.response_key.field_name !== null && eachAnalysis.response_key.attr_value !== null) {
-                        obj.name = `${eachData.series_title}(${eachAnalysis.response_key.field_name} - ${eachAnalysis.response_key.attr_value})`;
+        if (data) {   
+            
+            data.cohorts.response.forEach(eachData => {
+                       
+                    const obj: LineChartInterface = {'name': data.event_name, data: []};
+                    if (eachData.response_key.field_name !== null && eachData.response_key.attr_value !== null) {
+                        obj.name = `${data.series_title}(${eachData.response_key.field_name} - ${eachData.response_key.attr_value})`;
                     } else {
-                        obj.name = `${eachData.series_title}`;
-                    }
-                    eachAnalysis.response_values.forEach(eachRes => {
+                        obj.name = `${data.series_title}`;
+                    }  
+                    eachData.response_values.forEach(eachRes => {
                         const array = [];
                         const timestamp = eachRes.window_id * 1000;
-                        const count = eachRes[userType];
+                        const count = eachRes.unique_users;
                         array.push(timestamp);
                         array.push(count);
                         obj.data.push(array);
+                       
                     });
                     newData.push(obj)
-                });
+                    
             });
-        }
+        }   
         return newData;
+        
     }
 
     barChartFormat(data, userType) {
         const newData: Array<any> = [];
         if (data) {
-            data.forEach(eachData => {
-                eachData.analytics.response.forEach(eachAnalysis => {
-                    let name = '';
-                    if (eachAnalysis.response_key.field_name !== null && eachAnalysis.response_key.attr_value !== null) {
-                        name = `${eachData.series_title}(${eachAnalysis.response_key.field_name} - ${eachAnalysis.response_key.attr_value})`;
+            data.cohorts.response.forEach(eachData => {
+               
+                 const obj: LineChartInterface = {'name': data.event_name, data: []};
+                    if (eachData.response_key.field_name !== null && eachData.response_key.attr_value !== null) {
+                        obj.name = `${data.series_title}(${eachData.response_key.field_name} - ${eachData.response_key.attr_value})`;
                     } else {
-                        name = `${eachData.series_title}`;
+                        obj.name = `${data.series_title}`;
                     }
-                    eachAnalysis.response_values.forEach(eachRes => {
+                    eachData.response_values.forEach(eachRes => {
                         const array = [];
-                        const count = eachRes[userType];
-                        array.push(name);
+                        const count = eachRes.unique_users;
                         array.push(count);
-                        newData.push(array);
+                        obj.data.push(array);
+                       
                     });
+                    newData.push(obj)
                 });
-            });
+            
         }
+       
         return newData;
     }
+
+    
+    
+
+
 }
 
 

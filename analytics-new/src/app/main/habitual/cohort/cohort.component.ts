@@ -1,6 +1,7 @@
 import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {CohortService} from './cohort.service';
 import {Router, ActivatedRoute} from '@angular/router';
+import * as _ from 'lodash';
 
 @Component({
     selector: 'fuse-habit-cohort',
@@ -9,8 +10,9 @@ import {Router, ActivatedRoute} from '@angular/router';
 })
 
 export class CohortComponent {
-
+    charts: Array<any> = [];
     cohortData : Array<any> = [];
+    dataObj = {};
 
     chartFilterData: any = {
         granularity: 'monthly',
@@ -125,8 +127,8 @@ export class CohortComponent {
         this.chartFilterData.endTime = event.data.endTime;
     }
 
-    getCohortData(){
-        this.cohortService.getCohortData().subscribe(response => {
+    getCohortTabsData(){
+        this.cohortService.getCohortTabsData().subscribe(response => {
             const res = response.json();
 
             if(res.data){
@@ -138,15 +140,41 @@ export class CohortComponent {
             
         });
     }
+    
+    reqCohortChartData(obj){
+        this.charts = []
+        const subscription = this.cohortService.cohortDataReq(obj).subscribe(res => {
+            if(res.status !== 500){
 
-    reqCohortTabs(obj){
-        //this.cohortService.cohortDataReq(obj);
+                const dataObj = {
+                    definedChart: obj.graph_type,
+                    definedChartData: []     
+                };
+                this.charts.push(dataObj);
+                const response = res.json() 
+               
+                
+                if (response.error) {
+                    //this.isLoaded = false;                              
+                } 
+                else{
+                     Array.prototype.forEach.call(response.data, dataRes => {
+                        const newData = this.cohortService.getChartDataFormat(dataRes, obj.graph_type, "userType")
+                        dataObj.definedChartData = _.cloneDeep(newData);
+                      });
+                      
+                } 
+              
+            }
+                    
+        });
+        this.cohortService.newCharts = this.charts
     }
-
+  
     ngOnInit(){
-        this.getCohortData()
-    }
+        this.getCohortTabsData()
 
+    }
 
 }
 

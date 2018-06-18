@@ -1,8 +1,17 @@
 <div class="cohort-chart">
-    <div *ngIf="type==='column'">
-        <fuse-column-chart></fuse-column-chart>
+    <div *ngIf="type ==='column'">
+        <div *ngFor = "let chart of charts">
+            <fuse-column-chart [chartData] = "chart.definedChartData" [chartType] = "chart.definedChart"></fuse-column-chart>
+        </div>      
     </div>
     <div *ngIf="type ==='line'">
-        <fuse-line-chart [chartData] = "cdata" [chartType] = "data.graph_type"></fuse-line-chart>
+        
+            <div *ngFor="let chart of charts">
+                <fuse-line-chart [chartData] = "chart.definedChartData" [chartType] = "chart.definedChart"></fuse-line-chart>
+            </div> 
+       
+        <!-- <div class="spinner-load" *ngIf="!isLoaded">
+                <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+        </div> -->
     </div>
 </div>

@@ -9,20 +9,12 @@ import {Component, Input, AfterViewInit, OnInit, ChangeDetectorRef, OnChanges} f
     templateUrl: 'line.chart.component.html'
 })
 export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
-    chartData: any;
+    @Input() chartType: string;
+    @Input() chartData: any;
     chart: any;
     show = false;
     constructor(private ref: ChangeDetectorRef){
-        this.chartData = [{
-            name: 'John',
-            data: [5, 3, 4, 7, 2]
-        }, {
-            name: 'Jane',
-            data: [2, 2, 3, 2, 1]
-        }, {
-            name: 'Joe',
-            data: [3, 4, 4, 2, 5]
-        }];
+        
     }
 
 
@@ -46,7 +38,7 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
 
     reDrawChart(){
         this.show = true;
-        this.chartData = [{
+        /**this.chartData = [{
             name: 'Tokyo',
             data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
 
@@ -62,7 +54,7 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
             name: 'Berlin',
             data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
-        }];
+        }];**/
         this.chart = new Chart({
             chart: {
                 type: 'column'

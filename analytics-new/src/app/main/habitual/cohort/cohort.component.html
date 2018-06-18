@@ -14,10 +14,11 @@
             <div class="main-chart-container">
                 <mat-card>
                     <mat-card-content>
-                        <mat-tab-group class="demo-tab-group" (selectedTabChange) = "reqCohortTabs(this.cohortData[$event.index])">
+                        <mat-tab-group class="demo-tab-group" (selectedTabChange) = "reqCohortChartData(this.cohortData[$event.index])">
                             <mat-tab  label={{cData.tab_name}} *ngFor="let cData of cohortData" >
                                 <div class="demo-tab-content">
-                                    <fuse-chart-cohort [type]="cData.graph_type" [data]="cData"></fuse-chart-cohort>
+                                    
+                                    <fuse-chart-cohort [type]="cData.graph_type" [data]="charts" [obj]="dataObj"></fuse-chart-cohort>
                                 </div>
                             </mat-tab>
                         </mat-tab-group>

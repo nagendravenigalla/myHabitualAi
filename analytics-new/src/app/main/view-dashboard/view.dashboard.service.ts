@@ -51,6 +51,7 @@ export class ViewDashboardService {
     }
 
     lineChartGql(data, userType){
+       
         const newData: Array<LineChartInterface> = [];
         if(data) {
             data.forEach(eachData => {
@@ -65,6 +66,7 @@ export class ViewDashboardService {
                         const array = [];
                         const timestamp = eachRes.window_id * 1000;
                         const count = eachRes[userType];
+                       
                         array.push(timestamp);
                         array.push(count);
                         obj.data.push(array);
