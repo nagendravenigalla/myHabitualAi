@@ -94,7 +94,7 @@ export class CreateChartComponent implements OnInit {
     handleFilterChangesResponseGQL(response, selectedChart) {
         if (response && response.status !== 500 && response.status !== 0) {
             try {
-                const allData = response.json().data;
+                const allData = response.data;
                 this.allData = _.cloneDeep(allData);
                 if (allData && allData.error === 'nodatafound') {
                     this.definedChartData = [];
@@ -211,7 +211,7 @@ export class CreateChartComponent implements OnInit {
             if (params.id) {
                 this.paramId = params.id;
                 this.chartService.getDashboard(params.id).subscribe(response => {
-                    this.allSharedData = response.json().payload.segment_ql;
+                    this.allSharedData = response.payload.segment_ql;
                     if (this.allSharedData) {
                         if (this.allSharedData.chartMetaData) {
                             this.dashboardData = {

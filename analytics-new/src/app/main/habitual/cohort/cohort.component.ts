@@ -129,12 +129,12 @@ export class CohortComponent {
 
     getCohortTabsData(){
         this.cohortService.getCohortTabsData().subscribe(response => {
-            const res = response.json();
+            const res = response;
 
-            if(res.data){
-                res.data.forEach(eachres => {
+            if(res['data']){
+                res['data'].forEach(eachres => {
                     this.cohortData.push(eachres)
-                    
+
                 })
             }
             
@@ -144,21 +144,20 @@ export class CohortComponent {
     reqCohortChartData(obj){
         this.charts = []
         const subscription = this.cohortService.cohortDataReq(obj).subscribe(res => {
-            if(res.status !== 500){
+            if(res['status'] !== 500){
 
                 const dataObj = {
                     definedChart: obj.graph_type,
                     definedChartData: []     
                 };
                 this.charts.push(dataObj);
-                const response = res.json() 
+                const response = res 
                
-                
-                if (response.error) {
+                if (response['error']) {
                     //this.isLoaded = false;                              
                 } 
                 else{
-                     Array.prototype.forEach.call(response.data, dataRes => {
+                     Array.prototype.forEach.call(response['data'], dataRes => {
                         const newData = this.cohortService.getChartDataFormat(dataRes, obj.graph_type, "userType")
                         dataObj.definedChartData = _.cloneDeep(newData);
                       });
