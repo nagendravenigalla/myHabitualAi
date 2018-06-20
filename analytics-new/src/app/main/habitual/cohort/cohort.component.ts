@@ -13,6 +13,7 @@ export class CohortComponent {
     charts: Array<any> = [];
     cohortData : Array<any> = [];
     dataObj = {};
+    isLoaded: boolean = false;
 
     chartFilterData: any = {
         granularity: 'monthly',
@@ -129,12 +130,12 @@ export class CohortComponent {
 
     getCohortTabsData(){
         this.cohortService.getCohortTabsData().subscribe(response => {
-            const res = response;
+            const res = response.json();
 
-            if(res['data']){
-                res['data'].forEach(eachres => {
+            if(res.data){
+                res.data.forEach(eachres => {
                     this.cohortData.push(eachres)
-
+                    
                 })
             }
             
@@ -143,21 +144,21 @@ export class CohortComponent {
     
     reqCohortChartData(obj){
         this.charts = []
+        this.isLoaded = false;
         const subscription = this.cohortService.cohortDataReq(obj).subscribe(res => {
-            if(res['status'] !== 500){
-
+            if(res.status !== 500){
+                this.isLoaded = true;
                 const dataObj = {
                     definedChart: obj.graph_type,
                     definedChartData: []     
                 };
                 this.charts.push(dataObj);
-                const response = res 
-               
-                if (response['error']) {
-                    //this.isLoaded = false;                              
+                const response = res.json() 
+                if (response.error) {
+                    this.isLoaded = false;                              
                 } 
                 else{
-                     Array.prototype.forEach.call(response['data'], dataRes => {
+                     Array.prototype.forEach.call(response.data, dataRes => {
                         const newData = this.cohortService.getChartDataFormat(dataRes, obj.graph_type, "userType")
                         dataObj.definedChartData = _.cloneDeep(newData);
                       });
@@ -165,6 +166,7 @@ export class CohortComponent {
                 } 
               
             }
+            this.isLoaded = true;
                     
         });
         this.cohortService.newCharts = this.charts

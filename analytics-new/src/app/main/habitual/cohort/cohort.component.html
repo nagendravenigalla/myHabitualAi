@@ -17,7 +17,9 @@
                         <mat-tab-group class="demo-tab-group" (selectedTabChange) = "reqCohortChartData(this.cohortData[$event.index])">
                             <mat-tab  label={{cData.tab_name}} *ngFor="let cData of cohortData" >
                                 <div class="demo-tab-content">
-                                    
+                                      <div class="spinner-load" *ngIf="!isLoaded">
+                                         <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>
+                                      </div>  
                                     <fuse-chart-cohort [type]="cData.graph_type" [data]="charts" [obj]="dataObj"></fuse-chart-cohort>
                                 </div>
                             </mat-tab>

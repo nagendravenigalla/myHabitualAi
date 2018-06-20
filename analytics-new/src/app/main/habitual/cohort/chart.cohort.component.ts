@@ -17,22 +17,19 @@ export class ChartCohortComponent implements OnChanges, OnInit{
 
     charts: any;
     chartMetric: string;
-    isLoaded: boolean = false;
+    
    
     constructor(private cohortService: CohortService, private route: Router, public activatedRoute: ActivatedRoute) {
           
     }
 
-    
-
-
     ngOnInit(){ 
+        
         
     }
 
     ngOnChanges(){
         this.charts = this.cohortService.newCharts
-        
     }
 
    
