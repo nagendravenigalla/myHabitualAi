@@ -11,6 +11,7 @@ import {Component, Input, AfterViewInit, OnInit, ChangeDetectorRef, OnChanges} f
 export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() chartType: string;
     @Input() chartData: any;
+    @Input() yLabel:any;
     chart: any;
     show = false;
     constructor(private ref: ChangeDetectorRef){
@@ -46,27 +47,14 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                 text: ''
             },
             xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
+                categories: this.chartData,
 
                 crosshair: true,
                 plotLines: [{
                     color: 'black',
                     dashStyle: 'dot',
                     width: 2,
-                    value: this.chartData.length/2,
+                    //value: this.chartData.length/2,
                     zIndex: 3,
                     label: {
                         align: 'right',
@@ -80,7 +68,7 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Rainfall (mm)'
+                    text: this.yLabel === 'unique_users' ? 'Unique Users' : 'Transaction Count'
                 },
             },
             credits: {
@@ -92,7 +80,12 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                     borderWidth: 0
                 }
             },
-            series: this.chartData
+            series: [{
+                name: '',
+                data: this.chartData,
+                colorByPoint: true,
+                crisp: false
+              }]
         });
 
 

@@ -21,6 +21,8 @@ export class CohortComponent {
         startTime: 0,
         endTime: 0
     };
+
+
     granulars: Array<any> = [{'displayValue': 'Daily', 'value': 'daily'},
         {'displayValue': 'Weekly', 'value': 'weekly'},
         {'displayValue': 'Monthly', 'value': 'monthly'}
@@ -119,7 +121,8 @@ export class CohortComponent {
 
     }
 
-    
+    allData: any = [];
+    eventsFilterData: any = {};
 
     changeInTimeWindow(event) {
         this.chartFilterData.timeWindow = event.data.timeWindow;
@@ -145,32 +148,26 @@ export class CohortComponent {
     reqCohortChartData(obj){
         this.charts = []
         this.isLoaded = false;
-        const subscription = this.cohortService.cohortDataReq(obj).subscribe(res => {
+         this.cohortService.cohortDataReq(obj).subscribe(res => {
             if(res.status !== 500){
                 this.isLoaded = true;
-                
-                const response = res.json() 
-                if (response.error) {
+                let allData = res.json()
+                if (allData.error) {
                     this.isLoaded = false;                              
                 } 
                 else{
-                     Array.prototype.forEach.call(response.data, dataRes => {
-                         const dataObj = {
-                                definedChart: obj.graph_type,
-                                definedChartData: []     
-                            };
-                            this.charts.push(dataObj);
-                        const newData = this.cohortService.getChartDataFormat(dataRes, obj.graph_type, "userType")
-                        dataObj.definedChartData = _.cloneDeep(newData);
-                      });
-                      
+                    if(allData.data){
+                        allData = _.cloneDeep(allData.data)
+                        const newData = this.cohortService.getChartDataFormat(allData, obj.graph_type, "userType")
+                        this.charts = _.cloneDeep(newData);
+                    }    
                 } 
               
             }
             this.isLoaded = true;
-                    
+            this.cohortService.newCharts = this.charts            
         });
-        this.cohortService.newCharts = this.charts
+        
     }
   
     ngOnInit(){

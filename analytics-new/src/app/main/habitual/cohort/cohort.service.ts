@@ -55,60 +55,57 @@ export class CohortService {
         return data;
     }
 
+
     lineChartFormat(data, userType) {
         const newData: Array<LineChartInterface> = [];
-        if (data) {   
-            
-            data.cohorts.response.forEach(eachData => {
-                       
-                    const obj: LineChartInterface = {'name': data.event_name, data: []};
-                    if (eachData.response_key.field_name !== null && eachData.response_key.attr_value !== null) {
-                        obj.name = `${data.series_title}(${eachData.response_key.field_name} - ${eachData.response_key.attr_value})`;
+        if (data) {
+            data.forEach(eachData => {
+                eachData.cohorts.response.forEach(eachAnalysis => {
+                    const obj: LineChartInterface = {'name': eachData.event_name, data: []};
+                    if (eachAnalysis.response_key.field_name !== null && eachAnalysis.response_key.attr_value !== null) {
+                        obj.name = `${eachData.series_title}(${eachAnalysis.response_key.field_name} - ${eachAnalysis.response_key.attr_value})`;
                     } else {
-                        obj.name = `${data.series_title}`;
-                    }  
-                    eachData.response_values.forEach(eachRes => {
+                        obj.name = `${eachData.series_title}`;
+                    }
+                    eachAnalysis.response_values.forEach(eachRes => {
                         const array = [];
                         const timestamp = eachRes.window_id * 1000;
                         const count = eachRes.unique_users;
                         array.push(timestamp);
                         array.push(count);
                         obj.data.push(array);
-                       
                     });
                     newData.push(obj)
-                    
+                });
             });
-        }   
+        }
         return newData;
-        
     }
 
     barChartFormat(data, userType) {
         const newData: Array<any> = [];
         if (data) {
-            data.cohorts.response.forEach(eachData => {
-               
-                 const obj: LineChartInterface = {'name': data.event_name, data: []};
-                    if (eachData.response_key.field_name !== null && eachData.response_key.attr_value !== null) {
-                        obj.name = `${data.series_title}(${eachData.response_key.field_name} - ${eachData.response_key.attr_value})`;
+            data.forEach(eachData => {
+                eachData.cohorts.response.forEach(eachAnalysis => {
+                    let name = '';
+                    if (eachAnalysis.response_key.field_name !== null && eachAnalysis.response_key.attr_value !== null) {
+                        name = `${eachData.series_title}(${eachAnalysis.response_key.field_name} - ${eachAnalysis.response_key.attr_value})`;
                     } else {
-                        obj.name = `${data.series_title}`;
+                        name = `${eachData.series_title}`;
                     }
-                    eachData.response_values.forEach(eachRes => {
+                    eachAnalysis.response_values.forEach(eachRes => {
                         const array = [];
                         const count = eachRes.unique_users;
+                        array.push(name);
                         array.push(count);
-                        obj.data.push(array);
-                       
+                        newData.push(array);
                     });
-                    newData.push(obj)
                 });
-            
+            });
         }
-       
         return newData;
     }
+
 
 
 
