@@ -1,8 +1,8 @@
 {
-  "env":"test",
+  "env":"prod1",
   "configObj":{
     "prod1": {
-      "baseUrl": "triloq.cafyne.net",
+      "baseUrl": "10.10.1.106",
       "habitualPort": 8017,
       "dashboardPort": 8080,
       "chartsPort": 8017,

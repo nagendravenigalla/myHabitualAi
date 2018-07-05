@@ -6,6 +6,7 @@ import * as _ from 'lodash';
 import {LineChartInterface} from '../../../common/line.chart.interface';
 import {CommonHelper} from "../../../common/common.helper";
 import { BaseConfig} from "../../../common/base.config";
+import {CommonCondition} from "../../../common/gql.object";
 
 @Injectable()
 export class CohortService {
@@ -33,7 +34,7 @@ export class CohortService {
             {
                 "segment_id" : 12,
                 "granularity" : "month",
-                "period" : 3,
+                "period" : 1,
                 "graph_type" : obj.graph_type,
                 "metric_type" : obj.metric_type
 
@@ -54,7 +55,6 @@ export class CohortService {
 
         return data;
     }
-
 
     lineChartFormat(data, userType) {
         const newData: Array<LineChartInterface> = [];
@@ -105,6 +105,86 @@ export class CohortService {
         }
         return newData;
     }
+
+    createGqlObject(gqlObject, aggLevel, eventFilterData, selectedChart) {
+        const gqlObj = _.cloneDeep(gqlObject);
+        if (parseInt(selectedChart) === 2) {
+            gqlObj.agg_level = null;
+        } else {
+            gqlObj.agg_level = aggLevel;
+        }
+        gqlObj.gqlObject.filters = this.getFilterConditions(eventFilterData.eventData);
+        gqlObj.commonCondition = this.getCommonConditions(eventFilterData.userData);
+        return gqlObj;
+
+    }
+
+    getFilterConditions(eventData) {
+        const filterArray = [];
+        if (eventData) {
+            eventData.forEach(eachEventData => {
+                if (eachEventData.isIterable) {
+                    const obj = {'name': '', groupBy: '', conditions: []};
+                    const groupArray = [];
+                    eachEventData.groupBy.forEach(eachGroup => {
+                        eachGroup.value.forEach(eachVal => {
+                            groupArray.push(eachVal.value);
+                        });
+                    });
+                    obj.groupBy = groupArray.join(',');
+                    if (eachEventData.value) {
+
+                        obj.name = eachEventData.value.length > 0 ? eachEventData.value[0].value : '';
+                        eachEventData.where.forEach(eachData => {
+                            if (eachData.param && eachData.param.length>0) {
+                                const filterConditions = this.fillCondition(eachData);
+                                obj.conditions.push(filterConditions);
+                            }
+                        });
+                        filterArray.push(obj);
+                    }
+                }
+            });
+        }
+        return filterArray;
+    }
+
+    getCommonConditions(userData) {
+        const array = [];
+        if (userData) {
+            userData.forEach(eachUserData => {
+                eachUserData.where.forEach(eachData => {
+                    if (eachData.param) {
+                        const conditionObj = this.fillCondition(eachData);
+                        array.push(conditionObj);
+                    }
+                });
+                eachUserData.actionPerformed.forEach(eachData => {
+                    if (eachData.param) {
+                        const conditionObj = this.fillCondition(eachData);
+                        array.push(conditionObj);
+                    }
+                });
+            });
+        }
+        return array;
+    }
+
+
+    fillCondition(eachData) {
+        const obj: CommonCondition = {fieldName: '', value: '', operator: ''};
+        if(eachData.value) {
+            const valueArray = [];
+            eachData.param.forEach(eachValue => {
+                valueArray.push(eachValue);
+            });
+            obj.fieldName = eachData.value[0].value;
+            obj.value = valueArray.join(',');
+            obj.operator = eachData.operator[0];
+        }
+        return obj;
+    }
+
 
 
 

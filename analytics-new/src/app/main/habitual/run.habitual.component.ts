@@ -26,7 +26,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
     end: number = 10;
     totalCount: number = 0;
     loaded: boolean = true;
-    paginateObj = {sort: 'serial_no', limit: 10, order: 'desc', offset: 0};
+    paginateObj = {sort: 'schedule_id', limit: 10, order: 'desc', offset: 0};
 
     constructor(public dialog: MatDialog, public router: Router, private habitualService: RunHabitualService) {
 
@@ -46,7 +46,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
             if (result && result.runName && result.baseName && result.date) {
                 const obj = {
                     schedule_name: result.runName,
-                    customerbase: result.baseName,
+                    segment_id: result.baseName,
                     executed_at: Math.round(result.date.getTime() / 1000)
                 };
                 this.habitualService.addRun(obj).subscribe(response => {
@@ -172,7 +172,7 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
     }
 
     viewChart(run){
-        this.router.navigate(['campaigns/comparison', run.schedule_id]);
+        this.router.navigate(['campaigns/comparison', run.serial_no]);
     }
 
     getData(operator = null) {
@@ -191,22 +191,26 @@ export class RunHabitualComponent implements OnInit, OnDestroy {
             this.clearPollInterval();
             this.loaded = true;
             if (response.status !== 0 && response.status !== 500) {
-                this.runData = response;
+                this.runData = response.json();
                 this.runArray = [];
                 this.totalCount = this.runData.payload.total;
-                for (let [key, val] of Object.entries(this.runData.payload)) {
-                    if (key !== 'total') {
-                        val['child_schedule_ids'].forEach(childVal => {
-                            childVal = setDefValues(childVal);
-                            childVal['runId'] = key;
-                        });
-                        val = setDefValues(val);
-                        val.childData = val['child_schedule_ids'];
-
-                        this.runArray.push(val);
-                    }
-                }
-
+                // for (let [key, val] of Object.entries(this.runData.payload)) {
+                //     if (key !== 'total') {
+                //         // val['child_schedule_ids'].forEach(childVal => {
+                            
+                //         //     childVal = setDefValues(childVal);
+                //         //     childVal['runId'] = key;
+                //         // });
+                //         // val = setDefValues(val);
+                //         // val.childData = val['child_schedule_ids'];
+                       
+                //         this.runArray.push(val);
+                //     }
+                // }
+                this.runData.payload.data.forEach(child => {
+                    this.runArray.push(child)
+                })
+          
                 this.runArray = _.sortBy(this.runArray, ['serial_no']).reverse();
                 this.end = this.getEnd();
                 /*this.pollData();*/

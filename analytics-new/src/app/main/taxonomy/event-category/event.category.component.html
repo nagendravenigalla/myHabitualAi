@@ -3,7 +3,7 @@
         <div class="side-nav-comp">
             <ul>
                 <li [ngClass]="{'active': event.attr_value===selectedCategory}" *ngFor="let event of subCatList" (click)="changeEventList(event)">
-                    <a>{{event.name}}</a>
+                    <a>{{event.subgroup_name}}</a>
                 </li>
             </ul>
             <button mat-button (click)="createGroup()">Edit Group</button>

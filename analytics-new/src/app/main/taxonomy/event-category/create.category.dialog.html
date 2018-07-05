@@ -15,7 +15,7 @@
 
                 <div>
                     <div class="edit-cat-group">
-                        <input placeholder="Name" [(ngModel)]="editData.name">
+                        <input placeholder="Name" [(ngModel)]="editData.subgroup_name">
                         <mat-error *ngIf="error">Please enter the name for a category</mat-error>
                     </div>
 
@@ -23,7 +23,7 @@
                 </div>
                 <div>
                     <div class="edit-cat-group">
-                        <input placeholder="Description" [(ngModel)]="editData.description"
+                        <input placeholder="Description" [(ngModel)]="editData.subgroup_desc"
                                (blur)="addNewSubCategory(editData)">
                         <mat-error *ngIf="error">Please enter the description</mat-error>
                     </div>
@@ -42,15 +42,16 @@
                     <ul class="run-header">
                         <li>Name</li>
                         <li>Description</li>
-                        <li>Model Input</li>
-                        <li>Use for Recommendation</li>
+                        <!-- <li>Model Input</li>
+                        <li>Use for Recommendation</li> -->
                         <li>Actions</li>
                     </ul>
 
                     <ul class="run-list" *ngFor="let subCategory of subCategories; let i = index;">
-                        <li>{{subCategory.name}}</li>
-                        <li>{{subCategory.description}}</li>
-                        <li>
+                        <li>{{subCategory.subgroup_name}}</li>
+                        <li>{{subCategory.subgroup_desc}}</li>
+                        
+                        <!-- <li>
                             <mat-icon _ngcontent-c49="" class="s-24 mat-icon material-icons check" role="img"
                                       aria-hidden="true">check
                             </mat-icon>
@@ -64,7 +65,7 @@
                                 >
                                 </mat-slide-toggle>
                             </section>
-                        </li>
+                        </li> -->
                         <li class="actions">
                             <span>
                                 <button class="md-icon-button"  mat-icon-button (click)="editCategory(i, subCategory)">
@@ -92,12 +93,12 @@
 
                         </ul>
                         <ul class="run-list" *ngFor="let event of events; let i of index">
-                            <li>{{event.event_name}}</li>
+                            <li>{{event.attr_value}}</li>
                             <li>
                                 <mat-form-field [floatLabel]="'never'">
                                     <mat-select placeholder="Select Sub Group" [(ngModel)]="event.groupName">
-                                        <mat-option *ngFor="let groupName of subCategories" [value]="groupName.recommendation_id">
-                                            {{ groupName.name }}
+                                        <mat-option *ngFor="let groupName of newSubCategories" [value]="groupName.subgroup_id">
+                                            {{ groupName.subgroup_name }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -129,7 +130,7 @@
                     </ul>
 
                     <ul class="run-list" *ngFor="let subCategory of categoryList; let i = index;">
-                        <li>{{subCategory.name}}</li>
+                        <li>{{subCategory.subgroup_name}}</li>
                         <li>{{subCategory.use_for_recommendation||'False'}}</li>
                         <li>{{subCategory.eventList.length+1}}</li>
                     </ul>

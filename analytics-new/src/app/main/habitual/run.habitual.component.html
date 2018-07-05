@@ -30,22 +30,13 @@
               <li>Id.</li>
               <li>Recommendation name</li>
               <li>Segment</li>
-              <li>Scheduled On</li>
-              <li>Status</li>
-              <!--<li>Summary</li>-->
               <li>Actions</li>
             </ul>
             <div *ngFor="let run of runArray; let i= index;" [ngClass]="{'odd-row':i%2===0,'even-row':i%2!==0}" class="each-list">
               <ul class="run-list" >
-                <li >{{run.serial_no}}</li>
+                <li>{{run.serial_no}}</li>
                 <li>{{run.schedule_name}}</li>
-                <li>{{run.basename}}</li>
-                <li>{{run.timestamp}}</li>
-                <li>
-                  <div class="status-field">
-                    <div>{{run.status}}</div>
-                  </div>
-                </li>
+                <li>{{run.segmentname}}</li>
                 <li>
                   <div>
                     <button class="md-icon-button"  mat-icon-button (click)="copyRun(run)"><i class="fa fa-files-o"></i></button>
@@ -55,15 +46,15 @@
                     <button class="md-icon-button"  mat-icon-button (click)="viewChart(run)"><i class="fa fa-line-chart" aria-hidden="true"></i></button>
                     <button *ngIf="run.isDownloading"><mat-spinner class="spin-color" [diameter]="15"></mat-spinner></button>
 
-                    <button class="md-icon-button col-button"  *ngIf="run.childData.length>0" [ngClass]="{'active':run.collapsed}" mat-icon-button (click)="run.collapsed = !run.collapsed">
+                    <!-- <button class="md-icon-button col-button"  *ngIf="run.childData.length>0" [ngClass]="{'active':run.collapsed}" mat-icon-button (click)="run.collapsed = !run.collapsed">
                       <i class="fa fa-angle-down plus"></i>
                       <i class="fa fa-angle-up minus"></i>
-                    </button>
+                    </button> -->
                   </div>
 
                 </li>
               </ul>
-              <div class="collapsible-wrapper" [ngClass]="{'collapsed':!run.collapsed}">
+              <!-- <div class="collapsible-wrapper" [ngClass]="{'collapsed':!run.collapsed}">
                 <div class="collapsible">
                   <div *ngFor="let childRun of run.childData; let i = index;">
                     <ul class="run-list">
@@ -89,7 +80,7 @@
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="spinner-load inner" *ngIf="!loaded">
               <mat-spinner class="spin-color" [strokeWidth]="5"></mat-spinner>

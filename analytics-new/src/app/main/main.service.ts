@@ -30,7 +30,7 @@ export class MainService {
 
         logoutObservable.subscribe(response => {
             window.location.href = this.baseConfig.logout();
-        });
+        })
 
 
         /*return this.http.get(url).map(res => {

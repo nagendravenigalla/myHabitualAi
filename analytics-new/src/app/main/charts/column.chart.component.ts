@@ -11,7 +11,6 @@ import {Component, Input, AfterViewInit, OnInit, ChangeDetectorRef, OnChanges} f
 export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
     @Input() chartType: string;
     @Input() chartData: any;
-    @Input() yLabel:any;
     chart: any;
     show = false;
     constructor(private ref: ChangeDetectorRef){
@@ -47,14 +46,27 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                 text: ''
             },
             xAxis: {
-                categories: this.chartData,
+                categories: [
+                    'Jan',
+                    'Feb',
+                    'Mar',
+                    'Apr',
+                    'May',
+                    'Jun',
+                    'Jul',
+                    'Aug',
+                    'Sep',
+                    'Oct',
+                    'Nov',
+                    'Dec'
+                ],
 
                 crosshair: true,
                 plotLines: [{
                     color: 'black',
                     dashStyle: 'dot',
                     width: 2,
-                    //value: this.chartData.length/2,
+                    value: this.chartData.length/2,
                     zIndex: 3,
                     label: {
                         align: 'right',
@@ -68,7 +80,7 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
             yAxis: {
                 min: 0,
                 title: {
-                    text: this.yLabel === 'unique_users' ? 'Unique Users' : 'Transaction Count'
+                    text: 'Rainfall (mm)'
                 },
             },
             credits: {
@@ -80,12 +92,7 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                     borderWidth: 0
                 }
             },
-            series: [{
-                name: '',
-                data: this.chartData,
-                colorByPoint: true,
-                crisp: false
-              }]
+            series: this.chartData
         });
 
 

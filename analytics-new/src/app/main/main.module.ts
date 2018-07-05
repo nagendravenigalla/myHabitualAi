@@ -41,7 +41,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
         FuseMainComponent
     ],
     providers   : [
-        MainService
+        MainService, { provide: HTTP_INTERCEPTORS, useClass: HttpLogoutInterceptor, multi: true }
     ]
 })
 

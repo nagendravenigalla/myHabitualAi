@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/combineLatest';
 import {catchError, map, tap} from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class EventFilterService {
     private eventNameData: any;
     private getAttributesUrl: string;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: Http) {
         this.eventConfig = new EventConfig();
         this.commonHelper = new CommonHelper();
         this.attributesUrl = this.eventConfig.getUrl('info');
@@ -88,8 +88,8 @@ export class EventFilterService {
     setMetaDataForEvents(data) {
         let arr = [];
         data.forEach(eachData => {
-            if (eachData.event_name) {
-                const obj = {viewValue: eachData.event_name.split('_').join(' '), value: eachData.event_name};
+            if (eachData.attr_value) {
+                const obj = {viewValue: eachData.attr_value.split('_').join(' '), value: eachData.attr_value};
                 arr.push(obj);
             }
         });
@@ -113,25 +113,31 @@ export class EventFilterService {
 
     getDistAttributeValues(type, attr_id): Observable<any> {
         const url = this.attributesUrl+type+'?attr_id='+attr_id;
-        return this.http.get(url).pipe(
+        return this.http.get(url).map(res => {
+            return res.json();
+        }).pipe(
             catchError(this.commonHelper.handleError('getEventAttributes', []))
         );
     }
 
     getAttributes(attrType): Observable<any> {
         const url = this.getAttributesUrl + '/' + attrType;
-        return this.http.get(url).pipe(catchError(
+        return this.http.get(url).map(res => {
+            return res.json();
+        }).pipe(catchError(
             this.commonHelper.handleError('get Attributes', [])));
     }
 
     getGroupableAttributes(): Observable<any> {
-        return this.http.get(this.groupableUrl).pipe(
+        return this.http.get(this.groupableUrl).map(res => {
+            return res.json();
+        }).pipe(
             catchError(this.commonHelper.handleError('getGroupableAttributes', []))
         );
     }
 
     getAttributeValues(tblName, colName): Observable<any> {
-        if (colName === 'event_name' && tblName==='event_details_meta' && this.eventNameData) {
+        if (colName === 'attr_value' && tblName==='event_attributes' && this.eventNameData) {
             return new Observable(observer => {
                 observer.next(this.eventNameData);
                 observer.complete();
@@ -139,10 +145,11 @@ export class EventFilterService {
         }
         const url = this.attributeValuesUrl+'?col='+colName+'&tbl='+tblName;
         return this.http.get(url).map(res => {
-            if (colName === 'event_name' && !this.eventNameData) {
-                this.eventNameData = res;
+            if (colName === 'attr_value' && !this.eventNameData) {
+                
+                this.eventNameData = res.json();
             }
-            return res;
+            return res.json();
         }).pipe(
             catchError(this.commonHelper.handleError('getHeroes', []))
         );

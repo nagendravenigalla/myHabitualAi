@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { HttpClient} from "@angular/common/http";
+import {Http} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {catchError, map, tap} from 'rxjs/operators';
 import {CommonHelper} from '../../common/common.helper';
@@ -15,7 +15,7 @@ export class ViewDashboardService {
     commonHelper: CommonHelper;
     private graphQlUrl: string;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: Http) {
         this.commonHelper = new CommonHelper();
         this.dashboardBaseUrl = this.dashboardConfig.getUrl('segment');
         this.deleteBaseUrl = this.dashboardConfig.getUrl('segment');
