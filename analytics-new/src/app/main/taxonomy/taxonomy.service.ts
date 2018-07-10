@@ -95,7 +95,7 @@ export class TaxonomyService {
                 catObject = {
                     subgroup_name: eachObject.subgroup_name,
                     subgroup_desc: eachObject.subgroup_desc,
-                    subgroup_id: attrVal
+                    subgroup_id: eachObject.subgroup_id
                 };
                 categoryObject.categories.push(catObject);
             }
