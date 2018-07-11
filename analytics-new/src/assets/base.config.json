@@ -2,7 +2,7 @@
   "env":"prod1",
   "configObj":{
     "prod1": {
-      "baseUrl": "10.10.1.106",
+      "baseUrl": "139.162.55.91",
       "habitualPort": 8017,
       "dashboardPort": 8080,
       "chartsPort": 8017,

@@ -32,6 +32,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     openDialog(event): void {
+
         const dialogRef = this.dialog.open(DeleteConfirmation, {
             width: '600px',
             data: event
@@ -50,7 +51,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     goToViewChart(chart) {
-        this.router.navigate(['/view-chart/' + chart.id]);
+        this.router.navigate(['/view-chart/' + chart.id])
     }
 
     /**
@@ -79,9 +80,9 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                         definedChart: 'line',
                         definedChartData: [],
                        
-                        id: eachResponse.segment_hash,
+                        id: eachResponse.segment_id,
                         chartId: eachResponse.segment_id,
-                        allData: eachResponse.segment_ql
+                        allData: eachResponse.graph_ql
                     };
                     this.charts.push(obj);
                 });
@@ -89,7 +90,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                 this.charts.forEach(eachChart => {
                
                     if (eachChart.allData) {
-                        
+                        console.log(eachChart.allData)
                         const subscription = this.viewDashboardService.getChartDataFromGraphQl(eachChart.allData.graphQl).subscribe(resp => {
                             if (resp.status !== 500) {
                                 let allData = resp.json();
