@@ -220,7 +220,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
         } else {
             const obj = this.eventsData[index].where[event.index];
             const newObj = this.eventsData[index].where[event.index].whereData.filter(eachData => {
-                return eachData.value === obj.value[0].value;
+                return eachData.attr_id === obj.value[0].attr_id;
             });
             this.eventService.getDistAttributeValues(newObj[0].entity_name, newObj[0].attr_id).subscribe(response => {
                 this.eventsData[index].where[event.index].param = [];
@@ -350,8 +350,9 @@ export class EventFilterComponent implements OnInit, OnChanges {
                 this.userData = _.cloneDeep(subObject['user']);
                 this.eventsData = _.cloneDeep(subObject['event']);
 
-
+                console.log(this.eventsData)
                 this.eventDataChanged.emit({userData: this.userData, eventData: this.eventsData});
+                console.log(this.eventsData)
             });
         }
     }
