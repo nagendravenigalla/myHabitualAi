@@ -143,7 +143,7 @@ export class EventFilterService {
                 observer.complete();
             });
         }
-        const url = this.attributeValuesUrl+'?col='+colName+'&tbl='+tblName;
+        const url = this.attributesUrl+'event?attr_id=25';
         return this.http.get(url).map(res => {
             if (colName === 'attr_value' && !this.eventNameData) {
                 

@@ -41,7 +41,7 @@ export class RunHabitualService
   }
 
   exportAsCSV(run): Observable<any>{
-    const url = this.exportAsCSVUrl + run.schedule_id;
+    const url = this.exportAsCSVUrl + run.serial_no;
     return this.http.get(url)
         .pipe(
             catchError(this.commonHelper.handleError('export as csv', {status: 500}))

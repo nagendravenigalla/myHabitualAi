@@ -212,7 +212,7 @@ export class CreateChartComponent implements OnInit {
             if (params.id) {
                 this.paramId = params.id;
                 this.chartService.getDashboard(params.id).subscribe(response => {
-                    this.allSharedData = response.json().payload.segment_ql;
+                    this.allSharedData = response.json().payload.graph_ql;
                     if (this.allSharedData) {
                         if (this.allSharedData.chartMetaData) {
                             this.dashboardData = {

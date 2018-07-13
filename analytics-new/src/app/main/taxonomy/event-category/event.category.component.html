@@ -2,7 +2,7 @@
     <div *ngIf="attrValue" >
         <div class="side-nav-comp">
             <ul>
-                <li [ngClass]="{'active': event.attr_value===selectedCategory}" *ngFor="let event of subCatList" (click)="changeEventList(event)">
+                <li [ngClass]="{'active': event.subgroup_id===selectedCategory}" *ngFor="let event of subCatList" (click)="changeEventList(event)">
                     <a>{{event.subgroup_name}}</a>
                 </li>
             </ul>

@@ -91,7 +91,7 @@ export class EventCategoryComponent{
                               eachEvent.event_name = obj[0].event_name;
                           }
                       });
-
+                      
                       const arr = _.uniqBy(res.payload, 'subgroup_id');
                     
                       this.subCatList = _.cloneDeep(arr);

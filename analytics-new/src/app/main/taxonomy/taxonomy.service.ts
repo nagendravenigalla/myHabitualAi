@@ -12,7 +12,7 @@ export class TaxonomyService {
   private getCategoriesUrl: string = 'categories';
   private getAttributesUrl: string = 'attributes';
   private createCategoryGroupUrl: string = 'categories';
-  private recommendedCategoriesUrl: string = 'recommendedCategories';
+  private recommendedCategoriesUrl: string = 'categories';
   private categoriesEventListUrl: string = 'categoriesEventList';
   commonHelper: CommonHelper;
   taxonomyConfig: TaxonomyConfig;
@@ -24,7 +24,7 @@ export class TaxonomyService {
       this.getCategoriesUrl = this.taxonomyConfig.getUrl('categories');
       this.getAttributesUrl = this.taxonomyConfig.getUrl('attributes');
       this.createCategoryGroupUrl = this.taxonomyConfig.getUrl('categories');
-      this.recommendedCategoriesUrl = this.taxonomyConfig.getUrl('recommendedCategories');
+      this.recommendedCategoriesUrl = this.taxonomyConfig.getUrl('categories');
       this.categoriesEventListUrl = this.taxonomyConfig.getUrl('categoriesEventList');
 
 
@@ -121,7 +121,7 @@ export class TaxonomyService {
         const postObj = this.createPostObjectForCreateGroup(obj, actionType, attrVal);
         if (postObj.categories.length > 0) {
             const url = this.recommendedCategoriesUrl;
-            return this.http.put(url, postObj).map(res => {
+            return this.http.put(url, postObj).map(res => {    
                 return res.json();
             }).pipe(catchError(
                 this.commonHelper.handleError('update recommended Categories', [])));
@@ -131,7 +131,7 @@ export class TaxonomyService {
   }
 
   getRecommendedCategories(id): Observable<any>{
-        const url = this.recommendedCategoriesUrl + "?group_id=" + id;
+        const url = this.getCategoriesUrl + "?group_id=" + id;
         return this.http.get(url).map(res => {
             return res.json();
         }).pipe(catchError(
@@ -139,7 +139,7 @@ export class TaxonomyService {
   }
 
   getCategoriesEventList(id): Observable<any>{
-      const url = this.categoriesEventListUrl + "?group_id=" + id;
+      const url = this.getCategoriesUrl + "?group_id=" + id;
       return this.http.get(url).map(res => {
           return res.json();
       }).pipe(catchError(

@@ -43,9 +43,9 @@ export class CreateCategoryComponent implements OnInit, OnChanges{
           if (this.subCategories.length > 0) {
               this.loaderObj.eventListLoader = true;
               this.newSubCategories = this.subCategories;
-              const newCategories = this.taxonomyService.setRecommendedCategories(this.subCategories,'new', this.attVal);
+              //const newCategories = this.taxonomyService.setRecommendedCategories(this.subCategories,'new', this.attVal); 
               const updateCategories = this.taxonomyService.updateRecommendedCategories(this.subCategories,'update', this.attVal);
-              newCategories.merge(updateCategories).subscribe( res => {
+              updateCategories.subscribe( res => {
                   this.taxonomyService.getRecommendedCategories(this.attVal).subscribe(response => {
                       this.subCategories = response.payload;
                   });
@@ -167,7 +167,8 @@ export class CreateCategoryComponent implements OnInit, OnChanges{
       this.loaderObj.subCatLoader = true;
       this.taxonomyService.getRecommendedCategories(this.attVal).subscribe(response => {
           if(response.status!==404 && response.status!==500 && response.status!==400){
-              this.subCategories = response.payload;
+            const arr = _.uniqBy(response.payload, 'subgroup_id');
+              this.subCategories = arr;
           }
           this.loaderObj.subCatLoader = false;
       })

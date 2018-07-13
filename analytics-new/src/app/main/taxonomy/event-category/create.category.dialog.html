@@ -124,14 +124,14 @@
                     <span>Events Summary</span>
                     <ul class="run-header">
                         <li>Group name</li>
-                        <li>User For recommendation</li>
+                        <!-- <li>User For recommendation</li> -->
                         <li>No. of Events</li>
 
                     </ul>
 
                     <ul class="run-list" *ngFor="let subCategory of categoryList; let i = index;">
                         <li>{{subCategory.subgroup_name}}</li>
-                        <li>{{subCategory.use_for_recommendation||'False'}}</li>
+                        <!-- <li>{{subCategory.use_for_recommendation||'False'}}</li> -->
                         <li>{{subCategory.eventList.length+1}}</li>
                     </ul>
                     <div class="spinner-load inner" *ngIf="!categoryList">

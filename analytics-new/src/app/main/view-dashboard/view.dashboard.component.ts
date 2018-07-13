@@ -90,7 +90,6 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                 this.charts.forEach(eachChart => {
                
                     if (eachChart.allData) {
-                        console.log(eachChart.allData)
                         const subscription = this.viewDashboardService.getChartDataFromGraphQl(eachChart.allData.graphQl).subscribe(resp => {
                             if (resp.status !== 500) {
                                 let allData = resp.json();
@@ -172,7 +171,6 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     getEnd() {
-        console.log(this.charts.length, this.step, this.page);
         if (this.charts.length < this.step) {
             return (this.page - 1) * this.step + this.charts.length;
         } else {
