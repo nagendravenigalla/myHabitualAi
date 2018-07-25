@@ -3,9 +3,7 @@ export interface PostCategoryObjectInterface{
 }
 
 export interface EachCategory{
-    name:string;
-    description: string;
-    use_for_recommendation: boolean;
-    recommendation_id: boolean;
-    attr_id: number;
+    subgroup_name:string;
+    subgroup_desc: string;
+    subgroup_id: any;
 }

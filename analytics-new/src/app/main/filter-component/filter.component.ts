@@ -154,7 +154,7 @@ export class FiltersComponent implements OnInit, OnChanges{
           eachWhere.operators = ['=', '<=', '>='];
       }
     });
-    this.eventService.getAttributeValues('event_details_meta', 'event_name').subscribe( response => {
+    this.eventService.getAttributeValues('event_attributes', 'attr_value').subscribe( response => {
       if(response.payload) {
           this.events = this.eventService.setMetaDataForEvents(response.payload);
       }

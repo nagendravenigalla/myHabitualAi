@@ -1,13 +1,8 @@
 <div class="cohort-chart">
     <div *ngIf="type ==='column'">
-        <div *ngFor = "let chart of charts">
-            <fuse-column-chart [chartData] = "chart.definedChartData" [chartType] = "chart.definedChart"></fuse-column-chart>
-        </div>      
+         <fuse-column-chart [chartData] = "charts" [chartType] = "charts"></fuse-column-chart>     
     </div>
     <div *ngIf="type ==='line'">
-        
-            <div *ngFor="let chart of charts">
-                <fuse-line-chart [chartData] = "chart.definedChartData" [chartType] = "chart.definedChart"></fuse-line-chart>
-            </div> 
+         <fuse-line-chart [chartData] = "charts"></fuse-line-chart>      
     </div>
 </div>

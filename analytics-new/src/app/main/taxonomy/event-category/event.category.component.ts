@@ -37,6 +37,7 @@ export class EventCategoryComponent{
     const dialogRef = this.dialog.open(CreateCategoryComponent, {
         minWidth: 800,
         data: {attVal:this.attrValue}
+    
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -67,9 +68,9 @@ export class EventCategoryComponent{
   }
 
   changeEventList(event){
-      this.selectedCategory = event.attr_value;
+      this.selectedCategory = event.subgroup_id;
       this.filteredEventList = this.subCategoryEventArray.filter(subCat => {
-          return subCat.subCategory === event.attr_value;
+          return subCat.subCategory === event.subgroup_id;
       })[0].events;
 
   }
@@ -82,30 +83,35 @@ export class EventCategoryComponent{
 
                   if(res.payload && res.payload.length>0) {
                       res.payload.forEach(eachEvent => {
-                          const obj = _.filter(this.events, function (event) {
+                          const obj = _.filter(this.events, function(event) {
                               return event.event_id * 1 === eachEvent.event_id * 1;
                           });
                           if (obj.length > 0) {
+                              
                               eachEvent.event_name = obj[0].event_name;
                           }
                       });
-
-                      const arr = _.uniqBy(res.payload, 'attr_value');
+                      
+                      const arr = _.uniqBy(res.payload, 'subgroup_id');
+                    
                       this.subCatList = _.cloneDeep(arr);
-                      this.selectedCategory = this.subCatList[0].attr_value;
+                      this.selectedCategory = this.subCatList[0].subgroup_id;
+        
                       arr.forEach(eachSub => {
                           const obj = {'subCategory': '', events: []};
-                          obj.subCategory = eachSub.attr_value;
+                          obj.subCategory = eachSub.subgroup_id;
                           res.payload.forEach(eachEvent => {
-                              if (eachEvent.attr_value === obj.subCategory) {
+                              if (eachEvent.subgroup_id === obj.subCategory) {
+                         
                                   const newObj = {event_id: eachEvent.event_id, event_name: eachEvent.event_name};
-
+                             
                                   obj.events.push(newObj);
                               }
                           });
                           this.subCategoryEventArray.push(obj);
                       });
                       if (this.subCatList[0]) {
+                          
                           this.changeEventList(this.subCatList[0]);
                       }
                   }

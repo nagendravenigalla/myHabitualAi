@@ -24,8 +24,8 @@ export class TaxonomySidenavComponent implements OnInit{
     this.taxonomyService.getCategories().subscribe(response => {
       if (response.status !== 500) {
           response.payload.forEach(eachResponse => {
-            if (eachResponse.displayable) {
-                const obj = {name: eachResponse.display_name||eachResponse.field_name, url: './events/' + eachResponse.attr_id};
+            if (eachResponse.dependancy) {
+                const obj = {name: eachResponse.group_desc||eachResponse.group_type, url: './events/' + eachResponse.group_id};
                 this.events.push(obj);
             }
           });

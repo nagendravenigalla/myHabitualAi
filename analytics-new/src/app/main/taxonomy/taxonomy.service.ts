@@ -12,7 +12,7 @@ export class TaxonomyService {
   private getCategoriesUrl: string = 'categories';
   private getAttributesUrl: string = 'attributes';
   private createCategoryGroupUrl: string = 'categories';
-  private recommendedCategoriesUrl: string = 'recommendedCategories';
+  private recommendedCategoriesUrl: string = 'categories';
   private categoriesEventListUrl: string = 'categoriesEventList';
   commonHelper: CommonHelper;
   taxonomyConfig: TaxonomyConfig;
@@ -24,7 +24,7 @@ export class TaxonomyService {
       this.getCategoriesUrl = this.taxonomyConfig.getUrl('categories');
       this.getAttributesUrl = this.taxonomyConfig.getUrl('attributes');
       this.createCategoryGroupUrl = this.taxonomyConfig.getUrl('categories');
-      this.recommendedCategoriesUrl = this.taxonomyConfig.getUrl('recommendedCategories');
+      this.recommendedCategoriesUrl = this.taxonomyConfig.getUrl('categories');
       this.categoriesEventListUrl = this.taxonomyConfig.getUrl('categoriesEventList');
 
 
@@ -68,7 +68,7 @@ export class TaxonomyService {
   getCategories(attr = ''): Observable<any>{
       let url = this.getCategoriesUrl;
       if (attr){
-          url = url + '?attr_id=' + attr;
+          url = url + '?group_id=' + attr;
       }
       return this.http.get(url).map(res => {
           return res.json();
@@ -80,28 +80,22 @@ export class TaxonomyService {
         const categoryObject = {categories: []};
         obj.forEach(eachObject => {
             let catObject: EachCategory = {
-                name: '',
-                description: '',
-                use_for_recommendation: false,
-                recommendation_id: undefined,
-                attr_id: attrVal
+                subgroup_name: '',
+                subgroup_desc: '',
+                subgroup_id: ''
             };
-            if (actionType === 'new' && !eachObject.recommendation_id) {
+            if (actionType === 'new') {
                 catObject = {
-                   name: eachObject.name,
-                   description: eachObject.description,
-                   use_for_recommendation: eachObject.use_for_recommendation,
-                    recommendation_id: eachObject.recommendation_id,
-                    attr_id: attrVal
+                    subgroup_name: eachObject.subgroup_name,
+                   subgroup_desc: eachObject.subgroup_desc,
+                   subgroup_id: eachObject.subgroup_id
                 };
                categoryObject.categories.push(catObject);
-            }else if (actionType === 'update' && eachObject.recommendation_id){
+            }else if (actionType === 'update'){
                 catObject = {
-                    name: eachObject.name,
-                    description: eachObject.description,
-                    use_for_recommendation: eachObject.use_for_recommendation,
-                    recommendation_id: eachObject.recommendation_id,
-                    attr_id: attrVal
+                    subgroup_name: eachObject.subgroup_name,
+                    subgroup_desc: eachObject.subgroup_desc,
+                    subgroup_id: eachObject.subgroup_id
                 };
                 categoryObject.categories.push(catObject);
             }
@@ -127,7 +121,7 @@ export class TaxonomyService {
         const postObj = this.createPostObjectForCreateGroup(obj, actionType, attrVal);
         if (postObj.categories.length > 0) {
             const url = this.recommendedCategoriesUrl;
-            return this.http.put(url, postObj).map(res => {
+            return this.http.put(url, postObj).map(res => {    
                 return res.json();
             }).pipe(catchError(
                 this.commonHelper.handleError('update recommended Categories', [])));
@@ -136,16 +130,16 @@ export class TaxonomyService {
         }
   }
 
-  getRecommendedCategories(): Observable<any>{
-        const url = this.recommendedCategoriesUrl;
+  getRecommendedCategories(id): Observable<any>{
+        const url = this.getCategoriesUrl + "?group_id=" + id;
         return this.http.get(url).map(res => {
             return res.json();
         }).pipe(catchError(
             this.commonHelper.handleError('get recommended Categories', [])));
   }
 
-  getCategoriesEventList(): Observable<any>{
-      const url = this.categoriesEventListUrl;
+  getCategoriesEventList(id): Observable<any>{
+      const url = this.getCategoriesUrl + "?group_id=" + id;
       return this.http.get(url).map(res => {
           return res.json();
       }).pipe(catchError(

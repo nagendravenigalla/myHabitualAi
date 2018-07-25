@@ -44,7 +44,7 @@ export class AddRunComponent implements OnInit{
       if (response.status === 404 || response.status === 500 ){
         this.baseNames = [];
       }else {
-          this.baseNames = response.payload;
+          this.baseNames = response.json().payload;
       }
     });
   }

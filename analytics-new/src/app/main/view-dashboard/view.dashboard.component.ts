@@ -32,6 +32,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     openDialog(event): void {
+
         const dialogRef = this.dialog.open(DeleteConfirmation, {
             width: '600px',
             data: event
@@ -50,7 +51,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     goToViewChart(chart) {
-        this.router.navigate(['/view-chart/' + chart.id]);
+        this.router.navigate(['/view-chart/' + chart.id])
     }
 
     /**
@@ -68,7 +69,7 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
         this.dashboardLoaded = false;
         this.viewDashboardService.getAllDashboards(this.paginateObj).subscribe(response => {
             this.dashboardLoaded = true;
-            const result = response;
+            const result = response.json();
             if (result.payload && result.payload.data) {
                 if(this.paginateObj.count && result.payload.count) {
                     this.totalCount = result.payload.count;
@@ -78,10 +79,10 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                     const obj = {
                         definedChart: 'line',
                         definedChartData: [],
-
-                        id: eachResponse.segment_hash,
+                       
+                        id: eachResponse.segment_id,
                         chartId: eachResponse.segment_id,
-                        allData: eachResponse.segment_ql
+                        allData: eachResponse.graph_ql
                     };
                     this.charts.push(obj);
                 });
@@ -89,13 +90,13 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
                 this.charts.forEach(eachChart => {
                
                     if (eachChart.allData) {
-                        
                         const subscription = this.viewDashboardService.getChartDataFromGraphQl(eachChart.allData.graphQl).subscribe(resp => {
                             if (resp.status !== 500) {
-                                let allData = resp;
+                                let allData = resp.json();
                                 if (allData.error) {
                                     eachChart.isLoaded = true;
                                     eachChart.definedChartData = [];
+                                                   																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																							
                                 } else {
                                     if (allData.data) {
                                         allData = _.cloneDeep(allData.data);
@@ -170,7 +171,6 @@ export class ViewDashboardComponent implements OnInit, AfterViewInit, OnChanges,
     }
 
     getEnd() {
-        console.log(this.charts.length, this.step, this.page);
         if (this.charts.length < this.step) {
             return (this.page - 1) * this.step + this.charts.length;
         } else {

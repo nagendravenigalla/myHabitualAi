@@ -15,7 +15,7 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() yLabel: string;
 
   constructor(private ref: ChangeDetectorRef){
-
+   
   }
 
 
@@ -74,8 +74,6 @@ export class BarChartComponent implements OnInit, AfterViewInit, OnChanges {
         crisp: false
       }]
     });
-
-
   }
 
 

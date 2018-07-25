@@ -46,27 +46,14 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                 text: ''
             },
             xAxis: {
-                categories: [
-                    'Jan',
-                    'Feb',
-                    'Mar',
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec'
-                ],
+                categories:this.chartData,
 
                 crosshair: true,
                 plotLines: [{
                     color: 'black',
                     dashStyle: 'dot',
                     width: 2,
-                    value: this.chartData.length/2,
+                    //value: this.chartData.length/2,
                     zIndex: 3,
                     label: {
                         align: 'right',
@@ -92,7 +79,12 @@ export class ColumnChartComponent implements OnInit, AfterViewInit, OnChanges {
                     borderWidth: 0
                 }
             },
-            series: this.chartData
+            series: [{
+                name: '',
+                data: this.chartData,
+                colorByPoint: true,
+                crisp: false
+              }]
         });
 
 

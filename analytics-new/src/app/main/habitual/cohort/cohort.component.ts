@@ -2,6 +2,7 @@ import {Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {CohortService} from './cohort.service';
 import {Router, ActivatedRoute} from '@angular/router';
 import * as _ from 'lodash';
+import {GQLInterface, GQLPostObject} from "../../../common/gql.object";
 
 @Component({
     selector: 'fuse-habit-cohort',
@@ -10,10 +11,13 @@ import * as _ from 'lodash';
 })
 
 export class CohortComponent {
+    private subscription: any;
     charts: Array<any> = [];
     cohortData : Array<any> = [];
     dataObj = {};
     isLoaded: boolean = false;
+    newSubscription: any;
+
 
     chartFilterData: any = {
         granularity: 'monthly',
@@ -21,6 +25,8 @@ export class CohortComponent {
         startTime: 0,
         endTime: 0
     };
+
+
     granulars: Array<any> = [{'displayValue': 'Daily', 'value': 'daily'},
         {'displayValue': 'Weekly', 'value': 'weekly'},
         {'displayValue': 'Monthly', 'value': 'monthly'}
@@ -39,94 +45,47 @@ export class CohortComponent {
             {'displayValue': '12 months', 'value': '12'}]
     };
 
-    data: [
-        {
-            "analytics": {
-                "response": [
-                    {
-                        "response_key": {
-                            "attr_value": "A",
-                            "field_name": "group"
-                        },
-                        "response_values": [
-                            {
-                                "avg_txn_metric": 12,
-                                "total_transactions": 34,
-                                "unique_users": 21,
-                                "window_id": null
-                            }
-                            ]
-                    },
-                    {
-                        "response_key": {
-                            "attr_value": "B",
-                            "field_name": "group"
-                        },
-                        "response_values": [
-                            {
-                                "avg_txn_metric": -10,
-                                "total_transactions": -23,
-                                "unique_users": 12,
-                                "window_id": null
-                            }
-                            ]
-                    }
-                    ]
-            },
-            "series_title": "ATM_BALANCE"
-        },
-        {
-            "analytics": {
-                "response": [
-                    {
-                        "response_key": {
-                            "attr_value": "A",
-                            "field_name": "group"
-                        },
-                        "response_values": [
-                            {
-                                "avg_txn_metric": 13,
-                                "total_transactions": 24,
-                                "unique_users": 9,
-                                "window_id": null
-                            }
-                            ]
-                    },
-                    {
-                        "response_key": {
-                            "attr_value": "B",
-                            "field_name": "group"
-                        },
-                        "response_values": [
-                            {
-                                "avg_txn_metric": -12,
-                                "total_transactions": 3,
-                                "unique_users": -9,
-                                "window_id": null
-                            }
-                            ]
-                    }
-                    ]
-            },
-            "series_title": "ATM_CASH"
-        }
-        ];
+    tableData = {columnArray: [], dataArray: []};
+    gqlObject: GQLInterface = {agg_level: '', endTime: 0, startTime: 0, gqlObject: {filters: []}, commonCondition: []};
 
-    rows: Array<any> = [{name: 'first', type: 'line', data: this.data}, 
-                        {name: 'Second name', type: 'column', data: this.data}]
+
 
     constructor(private cohortService: CohortService, private route: Router, public activatedRoute: ActivatedRoute) {
 
     }
 
-    
+    allData: any = [];
+    eventsFilterData: any = {};
 
     changeInTimeWindow(event) {
+        debugger
         this.chartFilterData.timeWindow = event.data.timeWindow;
         this.chartFilterData.granularity = event.data.granularity;
         this.chartFilterData.startTime = event.data.startTime;
         this.chartFilterData.endTime = event.data.endTime;
+        this.onFilterChanges(this.eventsFilterData, this.chartFilterData.selectedChart);
     }
+    onFilterChanges(eventFilterData, selectedChart) {
+        debugger
+        this.charts = [];
+        this.isLoaded = true;
+        const graphQlObject:GQLPostObject = {request_json: this.createGqlObject(eventFilterData, this.chartFilterData.startTime, this.chartFilterData.endTime, selectedChart)};
+        if (this.newSubscription) {
+            this.newSubscription.unsubscribe();
+        }
+        this.newSubscription = this.cohortService.cohortDataReq(graphQlObject).subscribe(response => {
+            //this.handleFilterChangesResponseGQL(response, selectedChart);
+        })
+    }
+
+    createGqlObject(eventFilterData, startTime, endTime, selectedChart) {
+        const modifiedGqlObject = this.cohortService.createGqlObject(this.gqlObject, this.chartFilterData.granularity, eventFilterData, selectedChart);
+        modifiedGqlObject.startTime = startTime;
+        modifiedGqlObject.endTime = endTime;
+        return modifiedGqlObject;
+    }
+
+  
 
     getCohortTabsData(){
         this.cohortService.getCohortTabsData().subscribe(response => {
@@ -145,31 +104,26 @@ export class CohortComponent {
     reqCohortChartData(obj){
         this.charts = []
         this.isLoaded = false;
-        const subscription = this.cohortService.cohortDataReq(obj).subscribe(res => {
+         this.cohortService.cohortDataReq(obj).subscribe(res => {
             if(res.status !== 500){
                 this.isLoaded = true;
-                const dataObj = {
-                    definedChart: obj.graph_type,
-                    definedChartData: []     
-                };
-                this.charts.push(dataObj);
-                const response = res.json() 
-                if (response.error) {
+                let allData = res.json()
+                if (allData.error) {
                     this.isLoaded = false;                              
                 } 
                 else{
-                     Array.prototype.forEach.call(response.data, dataRes => {
-                        const newData = this.cohortService.getChartDataFormat(dataRes, obj.graph_type, "userType")
-                        dataObj.definedChartData = _.cloneDeep(newData);
-                      });
-                      
+                    if(allData.data){
+                        allData = _.cloneDeep(allData.data)
+                        const newData = this.cohortService.getChartDataFormat(allData, obj.graph_type, "userType")
+                        this.charts = _.cloneDeep(newData);
+                    }    
                 } 
               
             }
             this.isLoaded = true;
-                    
+            this.cohortService.newCharts = this.charts            
         });
-        this.cohortService.newCharts = this.charts
+        
     }
   
     ngOnInit(){

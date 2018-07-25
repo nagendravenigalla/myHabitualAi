@@ -1,5 +1,6 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 import { Observable} from 'rxjs/Observable';
 import { catchError } from 'rxjs/operators';
 import { HabitualConfig} from './habitual.config';
@@ -15,7 +16,7 @@ export class RunHabitualService
   private exportAsCSVUrl = '';
   habitualConfig: HabitualConfig;
   commonHelper: CommonHelper;
-  constructor(private http: HttpClient) {
+  constructor(private http: Http, private httpClient: HttpClient) {
     this.habitualConfig = new HabitualConfig();
     this.commonHelper = new CommonHelper();
     this.getRunDataUrl = this.habitualConfig.getUrl('tasks');
@@ -40,7 +41,7 @@ export class RunHabitualService
   }
 
   exportAsCSV(run): Observable<any>{
-    const url = this.exportAsCSVUrl + run.schedule_id;
+    const url = this.exportAsCSVUrl + run.serial_no;
     return this.http.get(url)
         .pipe(
             catchError(this.commonHelper.handleError('export as csv', {status: 500}))
