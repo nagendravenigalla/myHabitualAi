@@ -211,7 +211,7 @@ export class EventFilterComponent implements OnInit, OnChanges {
         if (type === 'user') {
             const obj = this.userData[index].where[event.index];
             const newObj = this.userData[index].where[event.index].whereData.filter(eachData => {
-                return eachData.value === obj.value[0].value;
+                return eachData.attr_id === obj.value[0].attr_id;
             });
             this.eventService.getDistAttributeValues(newObj[0].entity_name, newObj[0].attr_id).subscribe(response => {
                 this.userData[index].where[event.index].param = [];
