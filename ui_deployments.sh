@@ -54,7 +54,7 @@ confirm() {
 
 # A list of all variables to prompt in interactive mode. These variables HAVE
 # to be named exactly as the longname option definition in usage().
-interactive_opts=(username password gituser gitpass buildpath)
+interactive_opts=(username password gituser gitpass buildpath branch)
 
 # Print usage
 usage() {
@@ -64,7 +64,8 @@ UI Build/Install Script
   -u, --username    Username for script
   -g, --gituser     Username for Git
   -s, --gitpass     Password for Git
-  -b, --buildpath   Path for Build 
+  -b, --buildpath   Path for Build
+  -m, --branch      Branch for git 
   -p, --password    User Password
   -i, --interactive Prompt for values
   -h, --help        Display this help and exit
@@ -80,20 +81,23 @@ rollback() {
 main() {
 
 echo $password | sudo -S apt-get install -y curl
-curl -sL https://deb.nodesource.com/setup_6.x | bash -
+sudo curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
-sudo npm install -g angular-cli
+sudo npm install -g @angular/cli
 sudo apt install -y nginx
 
-mkdir -p $buildpath
+sudo mkdir -p $buildpath
 
-cd $buildpath
+
+cd $buildpath/repos
 
 git clone http://$gituser:$gitpass@github.com/3LOQ/eagle-alpha.git
 
+sudo chown -R $username:$username eagle-alpha
+
 cd eagle-alpha
 
-git checkout staging
+git checkout $branch
 
 cd analytics-new
 
@@ -125,7 +129,7 @@ server {
         server_name _;
 
         location / {
-  try_files $uri $uri/ /index.html;
+  try_files $$uri $$uri/ /index.html;
        }
 }
 EOF
@@ -253,6 +257,7 @@ while [[ $1 = -?* ]]; do
     -g|--gituser) shift; gituser=$1 ;;
     -s|--gitpassword) shift; gitpass=$1 ;;
     -b|--buildpath) shift; buildpath=$1 ;;
+    -m|--branch) shift; branch=$1 ;;
     -i|--interactive) interactive=1 ;;
     --endopts) shift; break ;;
     *) die "invalid option: $1" ;;
