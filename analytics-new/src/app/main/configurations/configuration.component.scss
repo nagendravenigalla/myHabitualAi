@@ -1,0 +1,57 @@
+
+.mn{
+  width: 100%;
+  height: 100%;
+}
+.example-button-row button{
+  color: #fff;
+  fill: #fff;
+  background-color: #039be5;
+  height: 40px;
+ margin-top: 20px;
+margin-left: 200px;
+},
+.example-button-row a {
+  margin-right: 8px;
+}
+
+mat-tab-group{
+  width: 100%;
+  height: 100%;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+mat-tab{
+  height: 100%;
+  width: 100%;
+}
+mat-card{
+width:95%;
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table{
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  max-height: 500px;
+}
+.button{
+  align-content: center;
+}
+.alignlt{
+  align-content: flex-end;
+}
+.h2{
+  text-align: center;
+}

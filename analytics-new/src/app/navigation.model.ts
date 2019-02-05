@@ -41,7 +41,15 @@ export class NavigationModel
                       'type' : 'item',
                       'icon' : 'sd_storage',
                       'url'  : '/campaigns'
-                    }
+                    },
+
+                    {
+                      'id'   : 'Configurations',
+                      'title': 'Configurations',
+                      'type' : 'item',
+                      'icon' : 'sd_storage',
+                       'url'  : '/configurations'
+              },
 
                 /*]
             }*/

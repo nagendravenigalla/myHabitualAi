@@ -1,0 +1,120 @@
+
+<div class="mn">
+    <div class="example-button-row">
+        <button mat-raised-button>Execute Configuration</button>
+        <button mat-raised-button class="sp">Create configuration Template</button>
+    </div>
+    <div>
+        <mat-card>
+        <mat-tab-group>
+        <mat-tab label=" Run Configuration "> <div>
+
+            <mat-table  [dataSource]="dataSource" class="example-container mat-elevation-z8" matSort>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                    <mat-header-cell *matHeaderCellDef> Config Id </mat-header-cell>
+                    <mat-cell *matCellDef="let data"> {{data.template_id}} </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Run By </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let data"> {{data.created_by}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef> Run Date </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let data"> {{data.created_on|date:'yyyy/MM/dd'}} </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="symbol">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef> Model Run Type </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let data"> {{data.template_name}} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="Action">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let element"><button mat-button [matMenuTriggerFor]="menu" class="md-icon-button" ><i class="fa fa-ellipsis-h"></i></button>
+                        <mat-menu #menu="matMenu">
+                            <button mat-menu-item>Modify</button>
+                            <button mat-menu-item>Modify and Run</button>
+                            <button mat-menu-item>Save As New Template</button>
+
+                        </mat-menu>
+                    </mat-cell>
+
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="['position', 'name', 'weight','symbol','Action']"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: ['position', 'name', 'weight','symbol','Action']"></mat-row>
+            </mat-table>
+
+            <mat-paginator #paginator
+                           [pageSize]="10"
+                           [pageSizeOptions]="[5, 10, 20]"
+                           [showFirstLastButtons]="true">
+            </mat-paginator>
+
+        </div>
+
+        </mat-tab>
+            <mat-tab label="Configuration Templates"> <div>
+
+                <mat-table  [dataSource]="DataSource" class="example-container mat-elevation-z8" matSort>
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                        <mat-header-cell *matHeaderCellDef> Config Id </mat-header-cell>
+                        <mat-cell *matCellDef="let data"> {{data.template_id}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header> Run By </mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let data"> {{data.created_by}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Weight Column -->
+                    <ng-container matColumnDef="weight">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef> Run Date </mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let data"> {{data.created_on|date:'yyyy/MM/dd'}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Symbol Column -->
+                    <ng-container matColumnDef="symbol">
+                        <mat-header-cell mat-header-cell *matHeaderCellDef> Model Run Type </mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let data"> {{data.template_name}} </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="Action">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let element"><button mat-button [matMenuTriggerFor]="menu" class="md-icon-button" ><i class="fa fa-ellipsis-h"></i></button>
+                        <mat-menu #menu="matMenu">
+                            <a routerLink = "viewrun"><button mat-menu-item>View Run</button></a>
+                            <button mat-menu-item>Modify and Run</button>
+                            <button mat-menu-item>Save As New Template</button>
+
+                        </mat-menu>
+                        </mat-cell>
+
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="['position', 'name', 'weight','symbol','Action']"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: ['position', 'name', 'weight','symbol','Action']"></mat-row>
+                </mat-table>
+
+                 <mat-paginator #paginator
+                                  [pageSize]="10"
+                                  [pageSizeOptions]="[5, 10, 20]"
+                                  [showFirstLastButtons]="true">
+            </mat-paginator>
+
+            </div> </mat-tab>
+
+        </mat-tab-group>
+        </mat-card>
+
+    </div>
+</div>
+

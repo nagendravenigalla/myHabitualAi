@@ -1,0 +1,364 @@
+<div class="mn">
+
+    <h2 class="headertekst">View Configuration Run</h2>
+    <hr>
+    <mat-card >
+        <mat-card class="sz">
+            <div fxLayout="row" >
+                <span fxLayout="column"class="pad"><h3 class="blk">Run ID:</h3></span> <span><input type="text" class="line"></span>
+                <span fxLayout="column"class="pad"><h3 class="blk">Template Name:</h3></span> <span><input type="text" class="line"></span>
+                <span fxLayout="column"class="pad"><h3 class="blk">Run By:</h3></span> <span><input type="text" class="line"></span>
+                <span fxLayout="column"class="pad"><h3 class="blk">Run Date:</h3></span> <span><input type="text" class="line"></span>
+                <span fxLayout="column" class="pad"  > <button mat-raised-button>Actions</button>     </span>
+    </div>
+        </mat-card>
+
+        <mat-card class="sz">
+  <h3>Data Window</h3>
+    <div fxLayout="row" >
+        <div fxLayout="column"><span class="pad"><h3 class="blk">Window:</h3></span></div>
+            <span class="pad"><mat-form-field >
+                <input  matInput [matDatepicker]="pickerFrom" placeholder="From">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom></mat-datepicker>
+            </mat-form-field></span>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerTo" placeholder="To">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo></mat-datepicker>
+            </mat-form-field></span>
+
+
+
+
+        <div fxLayout="column"><span class="pad"><h3 class="blk">Train:</h3></span></div>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerFrom1" placeholder="From">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom1"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom1></mat-datepicker>
+            </mat-form-field></span>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerTo1" placeholder="To">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo1"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo1></mat-datepicker>
+            </mat-form-field></span>
+
+
+
+
+    </div>
+    <div fxLayout="row" >
+        <div fxLayout="column"><span class="pad" ><h3 class="blk">Y:</h3></span></div>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerFrom2" placeholder="From">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom2"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom2></mat-datepicker>
+            </mat-form-field></span>
+            <span class="pad" ><mat-form-field >
+                <input matInput [matDatepicker]="pickerTo2" placeholder="To">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo2"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo2></mat-datepicker>
+            </mat-form-field></span>
+
+
+
+
+        <div fxLayout="column"><span class="pad" ><h3 class="blk">Test:</h3></span></div>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerFrom3" placeholder="From">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom3"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom3></mat-datepicker>
+            </mat-form-field></span>
+            <span class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerTo3" placeholder="To">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo3"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo3></mat-datepicker>
+            </mat-form-field></span>
+
+
+
+
+    </div>
+            <div fxLayout="row" >
+            <span fxLayout="column" class="pad"><h3 class="blk">Post Analysis:</h3></span>
+    <span fxLayout="column" class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerFrom4" placeholder="From">
+                <mat-datepicker-toggle matSuffix [for]="pickerFrom4"></mat-datepicker-toggle>
+                <mat-datepicker #pickerFrom4></mat-datepicker>
+            </mat-form-field></span>
+    <span fxLayout="column" class="pad"><mat-form-field >
+                <input matInput [matDatepicker]="pickerTo4" placeholder="To">
+                <mat-datepicker-toggle matSuffix [for]="pickerTo4"></mat-datepicker-toggle>
+                <mat-datepicker #pickerTo4></mat-datepicker>
+            </mat-form-field></span>
+            </div>
+    </mat-card>
+        <mat-card class="sz">
+    <h3>File Info</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column"class="pad"><h3 class="blk">Transation File:</h3></span> <span><input type="text" class="line"></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">Attributes File:</h3></span> <span><input type="text" class="line"></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">User Attribute File:</h3></span> <span><input type="text" class="line"></span>
+    </div>
+            <br>
+            <div fxLayout="row" >
+                <span fxLayout="column" class="pad"><h3 class="blk">UserId Map File:</h3></span> <span><input type="text" class="line"></span>
+                <span fxLayout="column" class="pad"><h3 class="blk">Event Attribute File:</h3></span> <span><input type="text" class="line"></span>
+
+    </div>
+        </mat-card>
+    <br>
+        <mat-card class="sz">
+    <h3 >Re-Mapping</h3>
+            <div fxLayout="row" >
+            <span fxLayout="column" class="pad"><h3 class="blk">Remapped Event Column:</h3></span>
+                <span fxLayout="column" class="pad"><mat-form-field>
+  <mat-select [(value)]="selected">
+    <mat-option value="x1">x1</mat-option>
+    <mat-option value="x2">x2</mat-option>
+    <mat-option value="x3">x3</mat-option>
+
+  </mat-select>
+</mat-form-field></span>
+            </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Use Case</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column" class="pad"><h3 class="blk">Interested Event:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected1">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Analyasis Event:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected2">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Target Event:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected3">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+    </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Outliers</h3>
+    <div fxLayout="row"  >
+        <span fxLayout="column"class="pad"><h3 class="blk">Events:</h3></span><span> <input type="text" class="line"></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">Users:</h3></span> <span><input type="text" class="line"></span>
+
+
+    </div>
+        </mat-card>
+    <br>
+        <mat-card class="sz">
+    <h3>Run Model</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column"class="pad"><h3 class="blk">y0 preDecline Bins:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected4">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">y1 preDecline Bins:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected5">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">y0 postDecline Bins:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected6">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+    </div>
+            <div fxLayout="row" >
+                <span fxLayout="column" class="pad"><h3 class="blk">y1 postDecline Bins:</h3></span>
+                <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected7">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+                <span fxLayout="column"class="pad"><h3 class="blk">Base preDecline Bins:</h3></span>
+                <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected8">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+    </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Regressor</h3>
+            <div fxLayout="row" >
+                <span fxLayout="column" class="pad"><h3 class="blk">NULL:</h3></span>
+                <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected9">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field>
+    </span>
+            </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Classifer</h3>
+            <div fxLayout="row" >
+                <span  fxLayout="column" class="pad"><h3 class="blk">Algorithm:</h3></span>
+                  <span fxLayout="column" class="pad">  <mat-form-field>
+        <mat-select [(value)]="selected10">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field>
+
+                </span>
+            </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Grid Search</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column"class="pad"><h3 class="blk">Max Depth:</h3></span>
+        <span fxLayout="column" class="pad"> <mat-form-field>
+        <mat-select [(value)]="selected11">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column"class="pad"><h3 class="blk">Max Iter:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected12">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+
+    </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Grid Search(RF)</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column" class="pad"><h3 class="blk">Impurity:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected13">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Max Bins:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected14">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Max Depth:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected15">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Num Trees:</h3></span>
+        <span fxLayout="column" class="pad"><<mat-form-field>
+        <mat-select [(value)]="selected16">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+
+    </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Grid Search(DT)</h3>
+    <div fxLayout="row" >
+        <span fxLayout="column" class="pad"><h3 class="blk">Max Bins:</h3></span>
+        <span fxLayout="column" class="pad"><mat-form-field>
+        <mat-select [(value)]="selected17">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+            <span fxLayout="column"class="pad"><h3 class="blk">Max Depth:</h3></span>
+            <span fxLayout="column"class="pad"><mat-form-field>
+        <mat-select [(value)]="selected18">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+    </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Pre Post Analysis</h3>
+            <div fxLayout="row" >
+            <span class="pad"><h3 class="blk">Granularity:</h3></span>
+            <span fxLayout="column"class="pad"> <mat-form-field>
+        <mat-select [(value)]="selected19">
+            <mat-option value="x1">x1</mat-option>
+            <mat-option value="x2">x2</mat-option>
+            <mat-option value="x3">x3</mat-option>
+        </mat-select>
+        </mat-form-field></span>
+            </div>
+        </mat-card>
+        <mat-card class="sz">
+    <h3>Recommendations</h3>
+    <div fxLayout="row"  >
+        <span fxLayout="column"  class="pad"><h3 class="blk">No Recommend Event:</h3></span><span> <input type="text" class="line"></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">N Recommns:</h3></span> <span><input type="text" class="line"></span>
+
+
+    </div>
+        </mat-card>
+    <br>
+        <mat-card class="sz">
+    <h3>Spark Content</h3>
+    <div fxLayout="row"  >
+        <span fxLayout="column" class="pad"><h3 class="blk">App Name:</h3></span> <span><input type="text" class="line"></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">Master:</h3></span> <span><input type="text" class="line"></span>
+        <span fxLayout="column" class="pad"><h3 class="blk">HDFS URL:</h3></span><span> <input type="text" class="line"></span>
+    </div>
+        </mat-card>
+    <br>
+        <mat-card class="sz">
+    <h3>JDBC Postgres</h3>
+    <div fxLayout="row"  >
+        <span fxLayout="column"class="pad"><h3 class="blk">HDFS URL:</h3></span> <span><input type="text" class="line"></span>
+    </div>
+        </mat-card>
+    <br>
+        <br>
+        <br>
+        <br>
+    </mat-card>
+</div>

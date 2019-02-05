@@ -2,9 +2,9 @@
   "env":"prod1",
   "configObj":{
     "prod1": {
-      "baseUrl": "139.162.55.91",
+      "baseUrl": "139.162.27.113",
       "habitualPort": 8017,
-      "dashboardPort": 8080,
+      "dashboardPort": 8017,
       "chartsPort": 8017,
       "base": "api/v1/",
       "dataSourceUrl": "http://demo.3loq.net:18630/",

@@ -24,7 +24,7 @@
     "@angular/flex-layout": "2.0.0-beta.10-4905443",
     "@angular/forms": "5.0.3",
     "@angular/http": "5.0.3",
-    "@angular/material": "^5.0.0",
+    "@angular/material": "^5.0.0-rc0",
     "@angular/material-moment-adapter": "^5.0.0",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
@@ -60,7 +60,7 @@
     "ngx-cookie": "3.0.1",
     "ngx-cookie-service": "1.0.9",
     "perfect-scrollbar": "1.2.0",
-     "rxjs": "5.5.2",
+    "rxjs": "5.5.2",
     "web-animations-js": "2.3.1",
     "zone.js": "0.8.18"
   },

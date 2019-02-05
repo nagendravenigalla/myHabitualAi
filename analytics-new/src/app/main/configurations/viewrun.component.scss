@@ -1,0 +1,62 @@
+.mn{
+  width: 100%;
+  height: 100%;
+
+}
+h2.headertekst {
+  text-align: center;
+}
+.mat-row{
+  width: 100%;
+
+  padding: 0 10px 0 10px;
+}
+mat-col {
+  padding: 0 10px 0 10px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+}
+.example-full-width {
+  width: 100%;
+}
+h3 {
+  margin-left: 40px;
+  color: #039be5;
+}
+h3.blk{
+  color: #000000;
+}
+.sp{
+  margin-left: 60px;
+}
+input.line {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  padding: 20px 10px 10px 10px;
+}
+mat-card{
+  width:95%;
+  height: 90%;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  overflow: auto;
+}
+mat-card.sz{
+  width:auto;
+  height:auto;
+  margin-top: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  overflow: auto;
+}
+.pad{
+  padding: 10px 10px 10px 10px;
+}
+.pad1{
+  padding: 20px 15px 15px 15px;
+}

@@ -28,14 +28,21 @@ const appRoutes: Routes = [
         path        : 'campaigns',
         loadChildren: './main/habitual/run.habitual.module#RunHabitualModule'
     },
+
     {
         path        : 'taxonomy',
         loadChildren: './main/taxonomy/taxonomy.module#TaxonomyModule'
     },
     {
+        path        : 'configurations',
+        loadChildren: './main/configurations/configuration.module#ConfigurationModule'
+    },
+
+    {
         path        : 'segments',
         loadChildren: './main/view-dashboard/view.dashboard.module#ViewDashboardModule'
     },
+
     {
         path: 'view-chart/:id',
         loadChildren: './main/create-chart/create.chart.module#CreateChartModule'
